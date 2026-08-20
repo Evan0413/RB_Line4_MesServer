@@ -1,0 +1,108 @@
+[INFO]2026-08-17 15:05:10,892:892.0.35684,31680#>[easy_sql_reader]:487  database_error: (2003, "Can't connect to MySQL server on '10.44.198.27' (timed out)")
+[INFO]2026-08-17 15:05:10,892:892.0.35684,31680#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:14:13,808:808.0.36996,35848#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:14:13,808:808.0.36996,35848#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:14:13,813:813.0.36996,35848#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:14:13,813:813.0.36996,35848#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:17:15,121:121.0.20248,2988#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:17:15,121:121.0.20248,2988#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:17:15,143:143.0.20248,2988#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:17:15,143:143.0.20248,2988#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:17:17,119:119.0.20248,2988#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-08-17 15:17:17,121:121.0.20248,2988#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
+[INFO]2026-08-17 15:17:17,122:122.0.20248,2988#>[client_connected]:437  ---------建立新连接时的设备信息---------
+[INFO]2026-08-17 15:17:17,122:122.0.20248,2988#>[client_connected]:438  python-getmqtt-93
+[INFO]2026-08-17 15:17:17,122:122.0.20248,2988#>[client_connected]:439  127.0.0.1
+[INFO]2026-08-17 15:17:17,122:122.0.20248,2988#>[client_connected]:440  52225
+[INFO]2026-08-17 15:17:17,123:123.0.20248,2988#>[Conn]:5110  >>>>>>Conn
+[INFO]2026-08-17 15:17:17,123:123.0.20248,21424#>[TConn]:5008  >>>>>TConn
+[INFO]2026-08-17 15:17:17,124:124.0.20248,21424#>[TConn]:5013  lock.acquire
+[INFO]2026-08-17 15:17:17,125:125.0.20248,21424#>[TConn]:5017  equip_connect:{}
+[INFO]2026-08-17 15:17:17,125:125.0.20248,21424#>[TConn]:5018  device_class:[]
+[INFO]2026-08-17 15:17:17,125:125.0.20248,21424#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
+[INFO]2026-08-17 15:17:17,130:130.0.20248,21424#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:17:17,130:130.0.20248,21424#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:17:17,131:131.0.20248,21424#>[SQL_function3]:688  []
+[INFO]2026-08-17 15:17:17,134:134.0.20248,21424#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:5029 -> TConn
+[INFO]2026-08-17 15:17:17,134:134.0.20248,21424#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-17 15:17:17,134:134.0.20248,21424#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
+[INFO]2026-08-17 15:17:17,134:134.0.20248,21424#>[Cache_writer]:63  -----lock_cache.acquire
+[INFO]2026-08-17 15:17:17,135:135.0.20248,21424#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-93': '127.0.0.1:52225'}
+[INFO]2026-08-17 15:17:17,135:135.0.20248,21424#>[Cache_writer]:68  -----lock_cache.release
+[INFO]2026-08-17 15:17:17,135:135.0.20248,21424#>[TConn]:5094  lock.release
+[INFO]2026-08-17 15:17:17,135:135.0.20248,21424#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
+[INFO]2026-08-17 15:21:35,773:773.0.35388,37536#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:21:35,773:773.0.35388,37536#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:21:35,777:777.0.35388,37536#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:21:35,777:777.0.35388,37536#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:21:37,760:760.0.35388,37536#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-08-17 15:21:37,761:761.0.35388,37536#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
+[INFO]2026-08-17 15:21:37,762:762.0.35388,37536#>[client_connected]:437  ---------建立新连接时的设备信息---------
+[INFO]2026-08-17 15:21:37,763:763.0.35388,37536#>[client_connected]:438  python-getmqtt-92
+[INFO]2026-08-17 15:21:37,763:763.0.35388,37536#>[client_connected]:439  127.0.0.1
+[INFO]2026-08-17 15:21:37,763:763.0.35388,37536#>[client_connected]:440  54609
+[INFO]2026-08-17 15:21:37,763:763.0.35388,37536#>[Conn]:5110  >>>>>>Conn
+[INFO]2026-08-17 15:21:37,763:763.0.35388,35856#>[TConn]:5008  >>>>>TConn
+[INFO]2026-08-17 15:21:37,764:764.0.35388,35856#>[TConn]:5013  lock.acquire
+[INFO]2026-08-17 15:21:37,764:764.0.35388,35856#>[TConn]:5017  equip_connect:{}
+[INFO]2026-08-17 15:21:37,765:765.0.35388,35856#>[TConn]:5018  device_class:[]
+[INFO]2026-08-17 15:21:37,766:766.0.35388,35856#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
+[INFO]2026-08-17 15:21:37,792:792.0.35388,35856#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:21:37,792:792.0.35388,35856#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:21:37,793:793.0.35388,35856#>[SQL_function3]:688  []
+[INFO]2026-08-17 15:21:37,797:797.0.35388,35856#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:5029 -> TConn
+[INFO]2026-08-17 15:21:37,797:797.0.35388,35856#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-17 15:21:37,798:798.0.35388,35856#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
+[INFO]2026-08-17 15:21:37,798:798.0.35388,35856#>[Cache_writer]:63  -----lock_cache.acquire
+[INFO]2026-08-17 15:21:37,798:798.0.35388,35856#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-92': '127.0.0.1:54609'}
+[INFO]2026-08-17 15:21:37,798:798.0.35388,35856#>[Cache_writer]:68  -----lock_cache.release
+[INFO]2026-08-17 15:21:37,798:798.0.35388,35856#>[TConn]:5094  lock.release
+[INFO]2026-08-17 15:21:37,798:798.0.35388,35856#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
+[INFO]2026-08-17 15:22:51,675:675.0.31832,424#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:22:51,677:677.0.31832,424#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:22:51,680:680.0.31832,424#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:22:51,680:680.0.31832,424#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:22:53,669:669.0.31832,424#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-08-17 15:22:53,670:670.0.31832,424#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
+[INFO]2026-08-17 15:22:53,671:671.0.31832,424#>[client_connected]:437  ---------建立新连接时的设备信息---------
+[INFO]2026-08-17 15:22:53,671:671.0.31832,424#>[client_connected]:438  python-getmqtt-83
+[INFO]2026-08-17 15:22:53,671:671.0.31832,424#>[client_connected]:439  127.0.0.1
+[INFO]2026-08-17 15:22:53,671:671.0.31832,424#>[client_connected]:440  56208
+[INFO]2026-08-17 15:22:53,671:671.0.31832,424#>[Conn]:5110  >>>>>>Conn
+[INFO]2026-08-17 15:22:53,672:672.0.31832,24612#>[TConn]:5008  >>>>>TConn
+[INFO]2026-08-17 15:22:53,673:673.0.31832,24612#>[TConn]:5013  lock.acquire
+[INFO]2026-08-17 15:22:53,673:673.0.31832,24612#>[TConn]:5017  equip_connect:{}
+[INFO]2026-08-17 15:22:53,673:673.0.31832,24612#>[TConn]:5018  device_class:[]
+[INFO]2026-08-17 15:22:53,674:674.0.31832,24612#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
+[INFO]2026-08-17 15:22:53,678:678.0.31832,24612#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:22:53,678:678.0.31832,24612#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:22:53,678:678.0.31832,24612#>[SQL_function3]:688  []
+[INFO]2026-08-17 15:22:53,682:682.0.31832,24612#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:5029 -> TConn
+[INFO]2026-08-17 15:22:53,682:682.0.31832,24612#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-17 15:22:53,683:683.0.31832,24612#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
+[INFO]2026-08-17 15:22:53,683:683.0.31832,24612#>[Cache_writer]:63  -----lock_cache.acquire
+[INFO]2026-08-17 15:22:53,683:683.0.31832,24612#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-83': '127.0.0.1:56208'}
+[INFO]2026-08-17 15:22:53,683:683.0.31832,24612#>[Cache_writer]:68  -----lock_cache.release
+[INFO]2026-08-17 15:22:53,684:684.0.31832,24612#>[TConn]:5094  lock.release
+[INFO]2026-08-17 15:22:53,684:684.0.31832,24612#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
+[INFO]2026-08-17 15:23:48,639:639.0.31832,10008#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-17 15:23:48,639:639.0.31832,10008#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-17 15:23:48,646:646.0.31832,10008#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:23:48,646:646.0.31832,10008#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:23:48,647:647.0.31832,10008#>[SQL_function3]:688  []
+[INFO]2026-08-17 15:23:48,693:693.0.31832,10008#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-17 15:23:48,694:694.0.31832,10008#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-17 15:24:04,752:752.0.31832,30748#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-17 15:24:04,752:752.0.31832,30748#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-17 15:24:04,757:757.0.31832,30748#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 15:24:04,757:757.0.31832,30748#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 15:24:04,757:757.0.31832,30748#>[SQL_function3]:688  []
+[INFO]2026-08-17 15:24:04,758:758.0.31832,30748#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-17 15:24:04,758:758.0.31832,30748#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-17 16:46:34,503:503.0.31832,12276#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-17 16:46:34,505:505.0.31832,12276#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-17 16:46:34,533:533.0.31832,12276#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-17 16:46:34,533:533.0.31832,12276#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-17 16:46:34,534:534.0.31832,12276#>[SQL_function3]:688  []
+[INFO]2026-08-17 16:46:34,537:537.0.31832,12276#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-17 16:46:34,537:537.0.31832,12276#>[SQL_function3]:691  查询结果: 0 条

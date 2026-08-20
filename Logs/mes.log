@@ -1,0 +1,27 @@
+[INFO]2026-08-20 15:22:56,808:808.0.14828,7844#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-20 15:22:56,809:809.0.14828,7844#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-20 15:22:56,815:815.0.14828,7844#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-20 15:22:56,815:815.0.14828,7844#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-20 15:22:58,751:751.0.14828,7844#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-08-20 15:22:58,752:752.0.14828,7844#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
+[INFO]2026-08-20 15:22:58,753:753.0.14828,7844#>[client_connected]:437  ---------建立新连接时的设备信息---------
+[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[client_connected]:438  python-getmqtt-99
+[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[client_connected]:439  127.0.0.1
+[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[client_connected]:440  60887
+[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[Conn]:5110  >>>>>>Conn
+[INFO]2026-08-20 15:22:58,756:756.0.14828,39492#>[TConn]:5008  >>>>>TConn
+[INFO]2026-08-20 15:22:58,756:756.0.14828,39492#>[TConn]:5013  lock.acquire
+[INFO]2026-08-20 15:22:58,757:757.0.14828,39492#>[TConn]:5017  equip_connect:{}
+[INFO]2026-08-20 15:22:58,758:758.0.14828,39492#>[TConn]:5018  device_class:[]
+[INFO]2026-08-20 15:22:58,758:758.0.14828,39492#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
+[INFO]2026-08-20 15:22:58,765:765.0.14828,39492#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-20 15:22:58,767:767.0.14828,39492#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-20 15:22:58,767:767.0.14828,39492#>[SQL_function3]:688  []
+[INFO]2026-08-20 15:22:58,806:806.0.14828,39492#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\COMMON\msg_operation.py:5029 -> TConn
+[INFO]2026-08-20 15:22:58,806:806.0.14828,39492#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-20 15:22:58,807:807.0.14828,39492#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
+[INFO]2026-08-20 15:22:58,807:807.0.14828,39492#>[Cache_writer]:63  -----lock_cache.acquire
+[INFO]2026-08-20 15:22:58,807:807.0.14828,39492#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-99': '127.0.0.1:60887'}
+[INFO]2026-08-20 15:22:58,808:808.0.14828,39492#>[Cache_writer]:68  -----lock_cache.release
+[INFO]2026-08-20 15:22:58,808:808.0.14828,39492#>[TConn]:5094  lock.release
+[INFO]2026-08-20 15:22:58,808:808.0.14828,39492#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备

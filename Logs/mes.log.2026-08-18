@@ -1,0 +1,76 @@
+[INFO]2026-08-18 18:03:34,172:172.0.1560,34340#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:03:34,175:175.0.1560,34340#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:03:34,196:196.0.1560,34340#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:03:34,196:196.0.1560,34340#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:03:36,136:136.0.1560,34340#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-08-18 18:03:36,137:137.0.1560,34340#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
+[INFO]2026-08-18 18:03:36,138:138.0.1560,34340#>[client_connected]:437  ---------建立新连接时的设备信息---------
+[INFO]2026-08-18 18:03:36,139:139.0.1560,34340#>[client_connected]:438  python-getmqtt-7
+[INFO]2026-08-18 18:03:36,140:140.0.1560,34340#>[client_connected]:439  127.0.0.1
+[INFO]2026-08-18 18:03:36,140:140.0.1560,34340#>[client_connected]:440  55629
+[INFO]2026-08-18 18:03:36,140:140.0.1560,34340#>[Conn]:5110  >>>>>>Conn
+[INFO]2026-08-18 18:03:36,142:142.0.1560,32456#>[TConn]:5008  >>>>>TConn
+[INFO]2026-08-18 18:03:36,142:142.0.1560,32456#>[TConn]:5013  lock.acquire
+[INFO]2026-08-18 18:03:36,143:143.0.1560,32456#>[TConn]:5017  equip_connect:{}
+[INFO]2026-08-18 18:03:36,143:143.0.1560,32456#>[TConn]:5018  device_class:[]
+[INFO]2026-08-18 18:03:36,144:144.0.1560,32456#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
+[INFO]2026-08-18 18:03:36,150:150.0.1560,32456#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:03:36,151:151.0.1560,32456#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:03:36,151:151.0.1560,32456#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:03:36,195:195.0.1560,32456#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:5029 -> TConn
+[INFO]2026-08-18 18:03:36,195:195.0.1560,32456#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-18 18:03:36,195:195.0.1560,32456#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
+[INFO]2026-08-18 18:03:36,196:196.0.1560,32456#>[Cache_writer]:63  -----lock_cache.acquire
+[INFO]2026-08-18 18:03:36,196:196.0.1560,32456#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-7': '127.0.0.1:55629'}
+[INFO]2026-08-18 18:03:36,197:197.0.1560,32456#>[Cache_writer]:68  -----lock_cache.release
+[INFO]2026-08-18 18:03:36,197:197.0.1560,32456#>[TConn]:5094  lock.release
+[INFO]2026-08-18 18:03:36,197:197.0.1560,32456#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
+[INFO]2026-08-18 18:05:34,130:130.0.1560,38388#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-18 18:05:34,130:130.0.1560,38388#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-18 18:05:34,137:137.0.1560,38388#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:05:34,138:138.0.1560,38388#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:05:34,138:138.0.1560,38388#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:05:34,193:193.0.1560,38388#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-18 18:05:34,194:194.0.1560,38388#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-18 18:05:48,626:626.0.1560,38388#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-18 18:05:48,626:626.0.1560,38388#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-18 18:05:48,631:631.0.1560,38388#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:05:48,631:631.0.1560,38388#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:05:48,632:632.0.1560,38388#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:05:48,633:633.0.1560,38388#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-18 18:05:48,633:633.0.1560,38388#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-18 18:05:49,643:643.0.1560,38388#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-18 18:05:49,643:643.0.1560,38388#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-18 18:05:49,650:650.0.1560,38388#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:05:49,650:650.0.1560,38388#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:05:49,651:651.0.1560,38388#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:05:49,652:652.0.1560,38388#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-18 18:05:49,652:652.0.1560,38388#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-18 18:08:46,879:879.0.1560,15764#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-18 18:08:46,879:879.0.1560,15764#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-18 18:08:46,886:886.0.1560,15764#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:08:46,887:887.0.1560,15764#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:08:46,887:887.0.1560,15764#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:08:46,888:888.0.1560,15764#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-18 18:08:46,888:888.0.1560,15764#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-18 18:09:21,243:243.0.1560,31548#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-18 18:09:21,243:243.0.1560,31548#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-18 18:09:21,253:253.0.1560,31548#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:09:21,253:253.0.1560,31548#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:09:21,253:253.0.1560,31548#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:09:21,254:254.0.1560,31548#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-18 18:09:21,255:255.0.1560,31548#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-18 18:09:26,737:737.0.1560,31548#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-18 18:09:26,737:737.0.1560,31548#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-18 18:09:26,743:743.0.1560,31548#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:09:26,744:744.0.1560,31548#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:09:26,744:744.0.1560,31548#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:09:26,745:745.0.1560,31548#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-18 18:09:26,745:745.0.1560,31548#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-18 18:09:27,256:256.0.1560,31548#>[PassAfterBind]:71  ---PassAfterBind
+[INFO]2026-08-18 18:09:27,256:256.0.1560,31548#>[SQL_function3]:678  SELECT * FROM station_tab WHERE gp_model = 'C01_2M_CS_ZQ_YQ' and equipment_num = 'ST08'
+[INFO]2026-08-18 18:09:27,278:278.0.1560,31548#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-18 18:09:27,278:278.0.1560,31548#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-18 18:09:27,279:279.0.1560,31548#>[SQL_function3]:688  []
+[INFO]2026-08-18 18:09:27,280:280.0.1560,31548#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\av_icon\COMMON\msg_operation.py:74 -> PassAfterBind
+[INFO]2026-08-18 18:09:27,280:280.0.1560,31548#>[SQL_function3]:691  查询结果: 0 条

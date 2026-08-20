@@ -1,0 +1,53 @@
+----------MQTT_Broker Start----------
+SELECT * FROM station_tab WHERE gp_model = 'GP-001'
+EquipNumGroup:
+<class 'list'>
+['ST01', 'ST05', 'ST08']
+Equip_Status
+<class 'list'>
+[{'EquipName': '上料', 'EquipNumber': 'ST01', 'EquipOrder': 'NA', 'EquipResult': 'NA'}, {'EquipName': 'AA下料固化', 'EquipNumber': 'ST05', 'EquipOrder': 'NA', 'EquipResult': 'NA'}, {'EquipName': 'plama', 'EquipNumber': 'ST08', 'EquipOrder': 'NA', 'EquipResult': 'NA'}]
+DeviceClass
+<class 'list'>
+[{'EquipName': '上料', 'EquipNumber': 'ST01', 'EquipIP': '10.150.20.18', 'EquipSerial': '1', 'EquipStatus': False}, {'EquipName': 'AA下料固化', 'EquipNumber': 'ST05', 'EquipIP': '10.150.21.87', 'EquipSerial': '6', 'EquipStatus': False}, {'EquipName': 'plama', 'EquipNumber': 'ST08', 'EquipIP': '10.150.21.122', 'EquipSerial': '11', 'EquipStatus': False}]
+{}
+[2023-07-13 21:55:46,513] :: INFO :: transitions.core :: Finished processing state new exit callbacks.
+[2023-07-13 21:55:46,513] :: INFO :: transitions.core :: Finished processing state starting enter callbacks.
+[2023-07-13 21:55:46,513] :: INFO :: amqtt.broker.plugins.event_logger_plugin :: ### 'on_broker_pre_start' EVENT FIRED ###
+[2023-07-13 21:55:46,513] :: INFO :: COMMON.amqtt.broker :: Listener 'default' bind to 0.0.0.0:1833 (max_connections=20)
+[2023-07-13 21:55:46,513] :: INFO :: transitions.core :: Finished processing state starting exit callbacks.
+[2023-07-13 21:55:46,513] :: INFO :: transitions.core :: Finished processing state started enter callbacks.
+[2023-07-13 21:55:46,513] :: INFO :: amqtt.broker.plugins.event_logger_plugin :: ### 'on_broker_post_start' EVENT FIRED ###
+----------MQTT_Client Start----------
+>>>>>>>>1 connected
+[2023-07-13 21:55:48,485] :: INFO :: COMMON.amqtt.broker :: Listener 'default': 1/20 connections acquired
+[2023-07-13 21:55:48,485] :: INFO :: COMMON.amqtt.broker :: Connection from 192.168.31.192:51295 on listener 'default'
+---------412建立新连接时的设备信息---------
+python-mqtt-22
+192.168.31.192
+51295
+[{'EquipName': '上料', 'EquipNumber': 'ST01', 'EquipIP': '10.150.20.18', 'EquipSerial': '1', 'EquipStatus': False}, {'EquipName': 'AA下料固化', 'EquipNumber': 'ST05', 'EquipIP': '10.150.21.87', 'EquipSerial': '6', 'EquipStatus': False}, {'EquipName': 'plama', 'EquipNumber': 'ST08', 'EquipIP': '10.150.21.122', 'EquipSerial': '11', 'EquipStatus': False}]
+{}
+[{'EquipName': '上料', 'EquipNumber': 'ST01', 'EquipIP': '10.150.20.18', 'EquipSerial': '1', 'EquipStatus': False}, {'EquipName': 'AA下料固化', 'EquipNumber': 'ST05', 'EquipIP': '10.150.21.87', 'EquipSerial': '6', 'EquipStatus': False}, {'EquipName': 'plama', 'EquipNumber': 'ST08', 'EquipIP': '10.150.21.122', 'EquipSerial': '11', 'EquipStatus': False}]
+{'python-mqtt-22': '192.168.31.192:51295'}
+[msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
+>>>>>>>>session
+[2023-07-13 21:55:48,488] :: INFO :: amqtt.broker.plugins.event_logger_plugin :: ### 'on_mqtt_packet_received' EVENT FIRED ###
+[2023-07-13 21:55:48,488] :: INFO :: transitions.core :: Finished processing state new exit callbacks.
+[2023-07-13 21:55:48,488] :: INFO :: transitions.core :: Finished processing state connected enter callbacks.
+[2023-07-13 21:55:48,488] :: INFO :: amqtt.broker.plugins.event_logger_plugin :: ### 'on_mqtt_packet_sent' EVENT FIRED ###
+Connected with result code 0[2023-07-13 21:55:48,488] :: INFO :: amqtt.broker.plugins.event_logger_plugin :: ### 'on_broker_client_connected' EVENT FIRED ###
+
+>>>>>>>>out whileConnected successfully
+
+>>>>>>>>while start
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 1 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): sessions.
+Run 'python manage.py migrate' to apply them.
+July 13, 2023 - 21:55:48
+Django version 3.2.18, using settings 'appDjango.settings'
+Starting development server at http://192.168.31.192:9000/
+Quit the server with CTRL-BREAK.
+^C

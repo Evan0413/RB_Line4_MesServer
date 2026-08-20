@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: amqtt
+Version: 0.11.0b1
+Summary: MQTT client/broker using Python asyncio
+Home-page: https://github.com/Yakifo/amqtt
+License: MIT
+Author: aMQTT Contributers
+Requires-Python: >=3.7,<4.0
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Communications
+Classifier: Topic :: Internet
+Provides-Extra: ci
+Requires-Dist: PyYAML (>=5.4.0,<7.0)
+Requires-Dist: coveralls (>=3.0.1,<4.0.0); extra == "ci"
+Requires-Dist: docopt (>=0.6.0,<0.7.0)
+Requires-Dist: passlib (>=1.7.0,<2.0.0)
+Requires-Dist: transitions (>=0.8.0,<0.9.0)
+Requires-Dist: websockets (>=9.0,<11.0)
