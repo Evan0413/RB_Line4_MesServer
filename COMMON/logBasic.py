@@ -81,8 +81,8 @@ proDir = os.path.split(os.path.realpath(__file__))[0]
 proDir = os.path.dirname(proDir)
 proDir = os.path.join(proDir, 'logs')
 configpath = os.path.join(proDir, 'mes.log')
-# 凌晨0点分割生成log，仅保留最新180个log记录
-log_handel = TimedRotatingFileHandler(configpath, when='midnight',backupCount = 180)
+# 按小时分割生成log，每小时一个文件，仅保留最新720个log记录（30天*24小时）
+log_handel = TimedRotatingFileHandler(configpath, when='H', interval=1, backupCount=720)
 log_handel.setFormatter(fmt)
 
 logger = logging.getLogger('info')
