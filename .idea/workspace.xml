@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="099d0f49-b95c-44dd-9734-833219431c6f" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/COMMON/logBasic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/SoftWare.ini" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/SoftWare.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/amqtt/broker.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/amqtt/broker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/amqtt/mqtt/protocol/broker_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/amqtt/mqtt/protocol/broker_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/amqtt/mqtt/protocol/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/amqtt/mqtt/protocol/handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/file_operation.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/file_operation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/getmqtt.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/getmqtt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/msg_operation.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/msg_operation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/ora.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/ora.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMON/setmqtt.py" beforeDir="false" afterPath="$PROJECT_DIR$/COMMON/setmqtt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManDe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManDe/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManDe/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManDe/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManDe/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManDe/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appDjango/COMMON/amqtt/broker.py" beforeDir="false" afterPath="$PROJECT_DIR$/appDjango/COMMON/amqtt/broker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appDjango/COMMON/file_operation.py" beforeDir="false" afterPath="$PROJECT_DIR$/appDjango/COMMON/file_operation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appDjango/COMMON/ora.py" beforeDir="false" afterPath="$PROJECT_DIR$/appDjango/COMMON/ora.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appDjango/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appDjango/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/appDjango/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/mes.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/mes.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,11 +36,15 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="2NteXi5qQxOf0AEP48SLoKkyzwN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -66,15 +54,21 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/at342/Desktop/djangobackup/docker_test/appDjango/appDjango&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -87,17 +81,20 @@
   <component name="RunManager" selected="Python.django_mes">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="appDjango" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="E:\Python310\python.exe" />
-      <option name="SDK_NAME" value="Python 3.10" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -109,17 +106,20 @@
     </configuration>
     <configuration name="django_mes" type="PythonConfigurationType" factoryName="Python">
       <module name="appDjango" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="E:\Python310\python.exe" />
-      <option name="SDK_NAME" value="Python 3.10" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
       <option name="PARAMETERS" value="runserver 10.44.199.246:9000 --noreload" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -131,6 +131,7 @@
     </configuration>
     <configuration name="appDjango" type="Python.DjangoServer" factoryName="Django server">
       <module name="appDjango" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -142,6 +143,8 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
+      <option name="RUN_TOOL" value="" />
       <option name="launchJavascriptDebuger" value="false" />
       <option name="port" value="8080" />
       <option name="host" value="" />
@@ -155,7 +158,15 @@
     </configuration>
     <list>
       <item itemvalue="Python.django_mes" />
+      <item itemvalue="Django 服务器.appDjango" />
     </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-b63d5a1f7c97-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.22158.340" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -179,6 +190,9 @@
       <workItem from="1682471776594" duration="5832000" />
       <workItem from="1682558859361" duration="6396000" />
       <workItem from="1683251022392" duration="737000" />
+      <workItem from="1787553310346" duration="398000" />
+      <workItem from="1787553848161" duration="9000" />
+      <workItem from="1787619384650" duration="2331000" />
     </task>
     <servers />
   </component>

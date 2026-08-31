@@ -1,27 +1,70 @@
-[INFO]2026-08-20 15:22:56,808:808.0.14828,7844#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-20 15:22:56,809:809.0.14828,7844#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-20 15:22:56,815:815.0.14828,7844#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-20 15:22:56,815:815.0.14828,7844#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-20 15:22:58,751:751.0.14828,7844#>[client_connected]:415  ---------1 connected---------
-[INFO]2026-08-20 15:22:58,752:752.0.14828,7844#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
-[INFO]2026-08-20 15:22:58,753:753.0.14828,7844#>[client_connected]:437  ---------建立新连接时的设备信息---------
-[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[client_connected]:438  python-getmqtt-99
-[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[client_connected]:439  127.0.0.1
-[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[client_connected]:440  60887
-[INFO]2026-08-20 15:22:58,755:755.0.14828,7844#>[Conn]:5110  >>>>>>Conn
-[INFO]2026-08-20 15:22:58,756:756.0.14828,39492#>[TConn]:5008  >>>>>TConn
-[INFO]2026-08-20 15:22:58,756:756.0.14828,39492#>[TConn]:5013  lock.acquire
-[INFO]2026-08-20 15:22:58,757:757.0.14828,39492#>[TConn]:5017  equip_connect:{}
-[INFO]2026-08-20 15:22:58,758:758.0.14828,39492#>[TConn]:5018  device_class:[]
-[INFO]2026-08-20 15:22:58,758:758.0.14828,39492#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
-[INFO]2026-08-20 15:22:58,765:765.0.14828,39492#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-20 15:22:58,767:767.0.14828,39492#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-20 15:22:58,767:767.0.14828,39492#>[SQL_function3]:688  []
-[INFO]2026-08-20 15:22:58,806:806.0.14828,39492#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\COMMON\msg_operation.py:5029 -> TConn
-[INFO]2026-08-20 15:22:58,806:806.0.14828,39492#>[SQL_function3]:691  查询结果: 0 条
-[INFO]2026-08-20 15:22:58,807:807.0.14828,39492#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
-[INFO]2026-08-20 15:22:58,807:807.0.14828,39492#>[Cache_writer]:63  -----lock_cache.acquire
-[INFO]2026-08-20 15:22:58,807:807.0.14828,39492#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-99': '127.0.0.1:60887'}
-[INFO]2026-08-20 15:22:58,808:808.0.14828,39492#>[Cache_writer]:68  -----lock_cache.release
-[INFO]2026-08-20 15:22:58,808:808.0.14828,39492#>[TConn]:5094  lock.release
-[INFO]2026-08-20 15:22:58,808:808.0.14828,39492#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
+[INFO]2026-08-25 15:19:27,012:12.0.37996,16280#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:19:27,013:13.0.37996,16280#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:19:27,036:36.0.37996,16280#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:19:27,037:37.0.37996,16280#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:19:28,990:990.0.37996,16280#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-08-25 15:19:28,990:990.0.37996,16280#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
+[INFO]2026-08-25 15:19:28,993:993.0.37996,16280#>[client_connected]:437  ---------建立新连接时的设备信息---------
+[INFO]2026-08-25 15:19:28,994:994.0.37996,16280#>[client_connected]:438  python-getmqtt-84
+[INFO]2026-08-25 15:19:28,994:994.0.37996,16280#>[client_connected]:439  127.0.0.1
+[INFO]2026-08-25 15:19:28,995:995.0.37996,16280#>[client_connected]:440  64669
+[INFO]2026-08-25 15:19:28,995:995.0.37996,16280#>[Conn]:5110  >>>>>>Conn
+[INFO]2026-08-25 15:19:28,996:996.0.37996,15288#>[TConn]:5008  >>>>>TConn
+[INFO]2026-08-25 15:19:28,996:996.0.37996,15288#>[TConn]:5013  lock.acquire
+[INFO]2026-08-25 15:19:28,996:996.0.37996,15288#>[TConn]:5017  equip_connect:{}
+[INFO]2026-08-25 15:19:28,997:997.0.37996,15288#>[TConn]:5018  device_class:[{'EquipName': 'A站PCB上料', 'EquipNumber': 'ST01', 'EquipIP': '192.168.10.5', 'EquipSerial': '1', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'B站PCB锁附', 'EquipNumber': 'ST02', 'EquipIP': '192.168.10.11', 'EquipSerial': '2', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'C站plasma&点胶', 'EquipNumber': 'ST03', 'EquipIP': '192.168.10.16', 'EquipSerial': '3', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'D站双AA+单AA', 'EquipNumber': 'ST04', 'EquipIP': '192.168.10.21', 'EquipSerial': '4', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'F&G站AA下料+固化', 'EquipNumber': 'ST05', 'EquipIP': '192.168.10.37', 'EquipSerial': '5', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'M站气密', 'EquipNumber': 'ST09', 'EquipIP': '192.168.10.111', 'EquipSerial': '9', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'N站EOL1', 'EquipNumber': 'ST10', 'EquipIP': '192.168.10.116', 'EquipSerial': '10', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'O站EOL2', 'EquipNumber': 'ST11', 'EquipIP': '192.168.10.121', 'EquipSerial': '11', 'EquipStatus': False, 'EquipError': False}, {'EquipName': '标定', 'EquipNumber': 'ST12', 'EquipIP': '192.168.10.126', 'EquipSerial': '12', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'S站下料', 'EquipNumber': 'ST14', 'EquipIP': '192.168.10.150', 'EquipSerial': '14', 'EquipStatus': False, 'EquipError': False}]
+[INFO]2026-08-25 15:19:28,999:999.0.37996,15288#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
+[INFO]2026-08-25 15:19:29,026:26.0.37996,15288#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:19:29,027:27.0.37996,15288#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:19:29,028:28.0.37996,15288#>[SQL_function3]:688  []
+[INFO]2026-08-25 15:19:29,066:66.0.37996,15288#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\COMMON\msg_operation.py:5029 -> TConn
+[INFO]2026-08-25 15:19:29,066:66.0.37996,15288#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-25 15:19:29,066:66.0.37996,15288#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
+[INFO]2026-08-25 15:19:29,067:67.0.37996,15288#>[Cache_writer]:63  -----lock_cache.acquire
+[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-84': '127.0.0.1:64669'}
+[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[Cache_writer]:68  -----lock_cache.release
+[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[TConn]:5094  lock.release
+[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
+[INFO]2026-08-25 15:21:09,387:387.0.37996,34900#>[login]:525  ----------------login-------------------
+[INFO]2026-08-25 15:21:09,388:388.0.37996,34900#>[SQL_function3]:678  select ID,userid from employee_tab WHERE userid='administrator'
+[INFO]2026-08-25 15:21:09,408:408.0.37996,34900#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:21:09,408:408.0.37996,34900#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:21:09,409:409.0.37996,34900#>[SQL_function3]:688  [{'ID': '1', 'userid': 'administrator'}]
+[INFO]2026-08-25 15:21:09,452:452.0.37996,34900#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:533 -> login
+[INFO]2026-08-25 15:21:09,452:452.0.37996,34900#>[SQL_function3]:691  查询结果: 1 条
+[INFO]2026-08-25 15:21:09,453:453.0.37996,34900#>[SQL_function3]:678   select ID,userid,password,level from employee_tab WHERE userid='administrator' and password='495051'
+[INFO]2026-08-25 15:21:09,480:480.0.37996,34900#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:21:09,480:480.0.37996,34900#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:21:09,481:481.0.37996,34900#>[SQL_function3]:688  []
+[INFO]2026-08-25 15:21:09,482:482.0.37996,34900#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:539 -> login
+[INFO]2026-08-25 15:21:09,482:482.0.37996,34900#>[SQL_function3]:691  查询结果: 0 条
+[INFO]2026-08-25 15:34:09,475:475.0.37996,23240#>[login]:525  ----------------login-------------------
+[INFO]2026-08-25 15:34:09,475:475.0.37996,23240#>[SQL_function3]:678  select ID,userid from employee_tab WHERE userid='a001'
+[INFO]2026-08-25 15:34:09,489:489.0.37996,23240#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:34:09,490:490.0.37996,23240#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:34:09,490:490.0.37996,23240#>[SQL_function3]:688  [{'ID': '8', 'userid': 'A001'}, {'ID': '30', 'userid': 'a001'}]
+[INFO]2026-08-25 15:34:09,491:491.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:533 -> login
+[INFO]2026-08-25 15:34:09,491:491.0.37996,23240#>[SQL_function3]:691  查询结果: 2 条
+[INFO]2026-08-25 15:34:09,491:491.0.37996,23240#>[SQL_function3]:678   select ID,userid,password,level from employee_tab WHERE userid='a001' and password='495051'
+[INFO]2026-08-25 15:34:09,497:497.0.37996,23240#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:34:09,497:497.0.37996,23240#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:34:09,498:498.0.37996,23240#>[SQL_function3]:688  [{'ID': '30', 'userid': 'a001', 'password': '495051', 'level': '1'}]
+[INFO]2026-08-25 15:34:09,500:500.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:539 -> login
+[INFO]2026-08-25 15:34:09,500:500.0.37996,23240#>[SQL_function3]:691  查询结果: 1 条
+[INFO]2026-08-25 15:34:09,501:501.0.37996,23240#>[Cache_writer]:63  -----lock_cache.acquire
+[INFO]2026-08-25 15:34:09,502:502.0.37996,23240#>[Cache_writer]:66  -----cache.set 5c38c1a8a05711f1a4ec14d424504d35 = {"userid": "a001", "username": "a001", "level": "1"}
+[INFO]2026-08-25 15:34:09,502:502.0.37996,23240#>[Cache_writer]:68  -----lock_cache.release
+[INFO]2026-08-25 15:34:09,503:503.0.37996,23240#>[SQL_function3]:678  SELECT Pass FROM model_tab WHERE gp_model = 'P01_4_H'
+[INFO]2026-08-25 15:34:09,508:508.0.37996,23240#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:34:09,509:509.0.37996,23240#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:34:09,509:509.0.37996,23240#>[SQL_function3]:688  [{'Pass': '19643'}]
+[INFO]2026-08-25 15:34:09,511:511.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:578 -> login
+[INFO]2026-08-25 15:34:09,511:511.0.37996,23240#>[SQL_function3]:691  查询结果: 1 条
+[INFO]2026-08-25 15:34:09,512:512.0.37996,23240#>[SQL_function3]:678  SELECT Fail FROM model_tab WHERE gp_model = 'P01_4_H'
+[INFO]2026-08-25 15:34:09,535:535.0.37996,23240#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:34:09,535:535.0.37996,23240#>[easy_sql_reader]:492  database_close
+[INFO]2026-08-25 15:34:09,536:536.0.37996,23240#>[SQL_function3]:688  [{'Fail': '4184'}]
+[INFO]2026-08-25 15:34:09,537:537.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:585 -> login
+[INFO]2026-08-25 15:34:09,538:538.0.37996,23240#>[SQL_function3]:691  查询结果: 1 条
+[INFO]2026-08-25 15:34:13,406:406.0.37996,23240#>[easy_sql_reader]:483  database_success
+[INFO]2026-08-25 15:34:13,407:407.0.37996,23240#>[easy_sql_reader]:492  database_close
