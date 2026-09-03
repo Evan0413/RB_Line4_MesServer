@@ -201,7 +201,7 @@ class ProtocolHandler:
         is not completed before ack_timeout second
         :return: ApplicationMessage used during inflight operations
         """
-        log.info("---------handler.mqtt_publish---------"+str(topic) + "--" + str(data) + "--qos" + str(qos))
+        log.debug("mqtt_publish topic=%s qos=%s", topic, qos)
         if qos in (QOS_1, QOS_2):
             packet_id = self.session.next_packet_id
             if packet_id in self.session.inflight_out:
@@ -209,7 +209,7 @@ class ProtocolHandler:
                     "A message with the same packet ID '%d' is already in flight"
                     % packet_id
                 )
-                log.info("---------error:A message with the same packet ID---------")
+                log.debug("error:A message with the same packet ID")
         else:
             packet_id = None
         message = OutgoingApplicationMessage(packet_id, topic, qos, data, retain)
@@ -288,19 +288,15 @@ class ProtocolHandler:
             else:
                 publish_packet = app_message.build_publish_packet()
             # Send PUBLISH packet
-            log.info("1----------Send PUBLISH packet----------")
             await self._send_packet(publish_packet)
             app_message.publish_packet = publish_packet
 
             # Wait for puback
-            log.info("1----------Wait for puback----------")
             waiter = asyncio.Future()
             self._puback_waiters[app_message.packet_id] = waiter
             try:
                 await waiter
-                log.info("1----------" + str(app_message.puback_packet) + "----------" + str(app_message.data))
                 app_message.puback_packet = waiter.result()
-                log.info("1----------" + str(app_message.puback_packet) + "----------" + str(app_message.data))
             finally:
                 self._puback_waiters.pop(app_message.packet_id, None)
                 # Discard inflight message
@@ -343,13 +339,8 @@ class ProtocolHandler:
                     # Store message in session
                     self.session.inflight_out[app_message.packet_id] = app_message
                     publish_packet = app_message.build_publish_packet()
-                # Send PUBLISH packet
-                log.info("---------Send PUBLISH packet---------")
-                log.info("----------" + str(app_message.data))
                 await self._send_packet(publish_packet)
                 app_message.publish_packet = publish_packet
-                # Wait PUBREC
-                log.info("---------Wait PUBREC---------")
                 if app_message.packet_id in self._pubrec_waiters:
                     # PUBREC waiter already exists for this packet ID
                     message = (
@@ -361,29 +352,20 @@ class ProtocolHandler:
                 waiter = asyncio.Future()
                 self._pubrec_waiters[app_message.packet_id] = waiter
                 try:
-                    log.info("2.1----------" + str(app_message.packet_id) + "----------" + str(app_message.data))
                     app_message.pubrec_packet = await waiter
-                    log.info("2.2----------" + str(app_message.packet_id) + "----------" + str(app_message.data))
                 finally:
                     self._pubrec_waiters.pop(app_message.packet_id, None)
                     self.session.inflight_out.pop(app_message.packet_id, None)
             if not app_message.pubcomp_packet:
-                # Send pubrel
-                log.info("---------Send pubrel---------")
                 app_message.pubrel_packet = PubrelPacket.build(app_message.packet_id)
                 await self._send_packet(app_message.pubrel_packet)
-                # Wait for PUBCOMP
-                log.info("---------Wait for PUBCOMP---------")
                 waiter = asyncio.Future()
                 self._pubcomp_waiters[app_message.packet_id] = waiter
                 try:
-                    log.info("2.3----------" + str(app_message.packet_id) + "----------" + str(app_message.data))
-                    # app_message.pubcomp_packet = await waiter
-                    log.info("2.4----------" + str(app_message.packet_id) + "----------" + str(app_message.data))
+                    app_message.pubcomp_packet = await waiter
                 finally:
                     self._pubcomp_waiters.pop(app_message.packet_id, None)
                     self.session.inflight_out.pop(app_message.packet_id, None)
-            log.info("---------_handle_qos2_message_flow END---------")
         elif app_message.direction == INCOMING:
             self.session.inflight_in[app_message.packet_id] = app_message
             # Send pubrec
@@ -427,8 +409,13 @@ class ProtocolHandler:
         while True:
             try:
                 self._reader_ready.set()
-                while running_tasks and running_tasks[0].done():
-                    running_tasks.popleft()
+                still_running = collections.deque()
+                while running_tasks:
+                    task = running_tasks.popleft()
+                    if task.done():
+                        continue
+                    still_running.append(task)
+                running_tasks = still_running
                 if len(running_tasks) > 1:
                     self.logger.debug("handler running tasks: %d" % len(running_tasks))
 

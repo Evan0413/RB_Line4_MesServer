@@ -38,6 +38,8 @@ async def broker_coro():
             }
         },
         'sys_interval': 10,
+        # 机台订阅 QoS2 时，broker 下发也按 2 走；上限改为 1，避免 PUBREC/PUBCOMP 握手拖住事件循环
+        'max-qos': 1,
             "auth": {
                 "allow-anonymous": True,
                 "password-file": os.path.join(

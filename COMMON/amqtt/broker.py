@@ -27,7 +27,6 @@ from amqtt.adapters import (
     WebSocketsWriter,
 )
 from .plugins.manager import PluginManager, BaseContext
-from django.core.cache import cache
 from COMMON.msg_operation import *
 import socket
 _defaults = {
@@ -960,7 +959,23 @@ class Broker:
                 .lstrip("?")
             )
             return match_pattern.fullmatch(topic)
-    # 广播主循环 每次循环将广播事件队列队头已经完成的事件弹出，并生成下一次的广播事件
+    def _reap_broadcast_tasks(self, running_tasks: deque):
+        """清掉所有已结束的 mqtt_publish，不只弹队头，避免一条卡住导致整列无法回收。"""
+        still_running = deque()
+        while running_tasks:
+            task = running_tasks.popleft()
+            if not task.done():
+                still_running.append(task)
+                continue
+            try:
+                task.result()
+            except CancelledError:
+                self.logger.debug("Task has been cancelled: %s", task)
+            except Exception:
+                self.logger.exception("Task failed and will be skipped: %s", task)
+        running_tasks.extend(still_running)
+
+    # 广播主循环 每次循环将广播事件队列中已经完成的事件弹出，并生成下一次的广播事件
     async def _broadcast_loop(self):
         # print("*****905 _broadcast_loop")
         running_tasks = deque()
@@ -972,16 +987,7 @@ class Broker:
                     await self.django_internal_message_broadcast(d_msg['topic'],d_msg['data'] , "2")
                 # ---------------------------------------------------
                 # log.info("whileloop")
-                while running_tasks and running_tasks[0].done():
-                    task = running_tasks.popleft()
-                    try:
-                        task.result()  # make asyncio happy and collect results
-                    except CancelledError:
-                        self.logger.info("Task has been cancelled: %s", task)
-                    except Exception:
-                        self.logger.exception(
-                            "Task failed and will be skipped: %s", task
-                        )
+                self._reap_broadcast_tasks(running_tasks)
                 run_broadcast_task = asyncio.Task(self._run_broadcast(running_tasks))
                 completed, _ = await asyncio.wait(
                     [run_broadcast_task, self._broadcast_shutdown_waiter],
@@ -1003,9 +1009,10 @@ class Broker:
     # 生成广播事件的函数，遍历需要发送的消息队列，将消息打包成广播事件插入到广播事件队列中
     async def _run_broadcast(self, running_tasks: deque):
         broadcast = await self._broadcast_queue.get()
+        self._broadcast_queue.task_done()
 
-        if "Msg2Station/ST" in broadcast["topic"]:
-            log.info("--------_broadcast_queue.get--" + broadcast["topic"] + "--" + str(broadcast["data"]))
+        if "Msg2Station/ST" in broadcast["topic"] and log.isEnabledFor(logging.DEBUG):
+            log.debug("--------_broadcast_queue.get--" + broadcast["topic"] + "--" + str(broadcast["data"]))
 
         if self.logger.isEnabledFor(logging.DEBUG):
             self.logger.debug("broadcasting %r", broadcast)
@@ -1024,6 +1031,8 @@ class Broker:
 
             for (target_session, qos) in subscriptions:
                 qos = broadcast.get("qos", qos)
+                if qos > 1:
+                    qos = 1
                 # Retain all messages which cannot be broadcasted
                 # due to the session not being connected
 
@@ -1053,19 +1062,14 @@ class Broker:
                         retain=False,
                     ),
                 )
-                if cache.get('EquipConnect', default=None) is not None:
-                    try:
-                        log.info("client_id:" + str(target_session.client_id))
-                        log.info("IP/Port:" + cache.get('EquipConnect')[str(target_session.client_id)])
-                    except:
-                        log.info(">>>>>>>>_run_broadcast: 未获得到该id信息")
-                else:
-                    print("EquipConnect = None")
                 running_tasks.append(task)
-
-                log.info("--------ready_broadcast--------")
-                log.info(task.get_name() + "------" + str(broadcast["topic"]) + "--" + str(broadcast["data"]))
-                log.info("running_tasks:" + str(len(running_tasks)) + "--" + str(running_tasks))
+                if log.isEnabledFor(logging.DEBUG):
+                    log.debug(
+                        "ready_broadcast topic=%s client=%s pending=%s",
+                        broadcast["topic"],
+                        target_session.client_id,
+                        len(running_tasks),
+                    )
     # 如果在创建发送事件时目标客户端断联
     async def _retain_broadcast_message(self, broadcast, qos, target_session):
         if self.logger.isEnabledFor(logging.DEBUG):
@@ -1109,8 +1113,12 @@ class Broker:
             broadcast["qos"] = force_qos
         await self._broadcast_queue.put(broadcast)
 
-        if "Msg2Station/ST" in topic:
-            log.info("--------_broadcast_queue.put--" + str(topic) + "--"+ str(data) + "--" + str(force_qos) + "---" + str(self._broadcast_queue))
+        if "Msg2Station/ST" in topic and log.isEnabledFor(logging.DEBUG):
+            log.debug(
+                "--------_broadcast_queue.put--%s qsize=%s",
+                topic,
+                self._broadcast_queue.qsize(),
+            )
     # 将客户端断联时，服务器未发送的数据重新发送
     async def publish_session_retained_messages(self, session):
         self.logger.debug(
@@ -1124,11 +1132,13 @@ class Broker:
         handler = self._get_handler(session)
         while not session.retained_messages.empty():
             retained = await session.retained_messages.get()
-            log.info("--------" + str(session.client_id) + "retained_data resend" + str(retained.data))
+            retained_qos = 1 if retained.qos and retained.qos > 1 else (retained.qos or 0)
+            if log.isEnabledFor(logging.DEBUG):
+                log.debug("retained_data resend client=%s topic=%s", session.client_id, retained.topic)
             publish_tasks.append(
                 asyncio.ensure_future(
                     handler.mqtt_publish(
-                        retained.topic, retained.data, retained.qos, True
+                        retained.topic, retained.data, retained_qos, True
                     ),
                 )
             )
@@ -1150,7 +1160,10 @@ class Broker:
                 publish_tasks.append(
                     asyncio.Task(
                         handler.mqtt_publish(
-                            retained.topic, retained.data, subscription[1], True
+                            retained.topic,
+                            retained.data,
+                            1 if subscription[1] > 1 else subscription[1],
+                            True
                         ),
                     )
                 )
