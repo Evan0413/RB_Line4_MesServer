@@ -431,13 +431,10 @@ class Broker:
             handler, client_session = await BrokerProtocolHandler.init_from_connect(
                 reader, writer, self.plugins_manager
             )
-            print("---------建立新连接时的设备信息---------")
-            print(client_session.client_id)
-            print(remote_address)
-            log.info("---------建立新连接时的设备信息---------")
-            log.info(client_session.client_id)
-            log.info(remote_address)
-            log.info(remote_port)
+            log.info(
+                "MQTT连接 client=%s %s:%s"
+                % (client_session.client_id, remote_address, remote_port)
+            )
             # 存入cache中
             Conn(client_session.client_id, remote_address, remote_port, True)
 
@@ -672,15 +669,17 @@ class Broker:
                         )
                     app_message = wait_deliver.result()
 
-                    log.info("-------信息输入-------")
-                    log.info(app_message.topic)
-                    log.info(app_message.qos)
-                    log.info(client_session.client_id)
-                    log.info(app_message.data.decode('utf-8'))
+                    log.debug(
+                        "MQTT消息 topic=%s qos=%s client=%s data=%s",
+                        app_message.topic,
+                        app_message.qos,
+                        client_session.client_id,
+                        app_message.data.decode('utf-8'),
+                    )
 
                     # await Recv(remote_address, app_message.data.decode('utf-8'), app_message.topic)
                     # asyncio.ensure_future(Recv(remote_address, app_message.data.decode('utf-8'), app_message.topic))
-                    Recv(remote_address, app_message.data.decode('utf-8'), app_message.topic)
+                    Recv(remote_address, app_message.data.decode('utf-8'), app_message.topic, client_session.client_id)
 
                     if not app_message.topic:
                         self.logger.warning(

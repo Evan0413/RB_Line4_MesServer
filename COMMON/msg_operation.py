@@ -60,12 +60,14 @@ url = {
 def Cache_writer(key = "",value = "",timeout=None):
     if key == "" :
         raise Exception("Cache写入错误")
-    log.info("-----lock_cache.acquire")
+    log.debug("-----lock_cache.acquire")
     lock_cache.acquire()
-    cache.set(key,value,timeout)
-    log.info("-----cache.set "  + str(key) + " = " + str(value))
-    lock_cache.release()
-    log.info("-----lock_cache.release")
+    try:
+        cache.set(key,value,timeout)
+        log.debug("-----cache.set "  + str(key) + " = " + str(value))
+    finally:
+        lock_cache.release()
+        log.debug("-----lock_cache.release")
 # 特殊型号的站点只进行绑定就出站
 def PassAfterBind(model,stno,main_name,main_code):
     log.info("---PassAfterBind")
@@ -348,6 +350,18 @@ def Getpartno_check_flag():
     else:
         raise Exception("partno_check_flag 数据不为True or False,请检查")
     return partno_check_flag
+def Getorder_partno_check_flag():
+    filepath = GetFilePath("SoftWare.ini")
+    conf = ConfigParser()
+    conf.read(filepath)
+    order_partno_check_flag = conf['CommonUse']['order_partno_check_flag']
+    if order_partno_check_flag.upper() == "TRUE":
+        return True
+    elif order_partno_check_flag.upper() == "FALSE":
+        return False
+    else:
+        raise Exception("order_partno_check_flag 数据不为True or False,请检查")
+    return order_partno_check_flag
 # 记录当前实际的胶水号
 def Setjs_part_no(js_part_no):
     filepath = GetFilePath("SoftWare.ini")
@@ -562,7 +576,7 @@ def SendMessage2Station(topic, data):
 
         # 通过mqtt客户端回复
         data = json.dumps(data, ensure_ascii=False)
-        log.info("SendMessage2Station_byclient" + str(data))
+        log.debug("SendMessage2Station topic=%s data=%s", topic, data)
         publish(topic, data)
     except Exception as err:
          log.info("SendMessage2Station ERROR:" + str(err))
@@ -674,21 +688,16 @@ def SQL_function2(SQL):
     log.info(data)
     return data
 def SQL_function3(SQL):
-    print(SQL)
-    log.info(SQL)
-    # [修复] 移除重复查询，原代码调用了两次easy_sql_reader导致数据库负载翻倍
-    # data = easy_sql_reader(SQL)
-    # log.info(data)
-    # # 添加调用栈日志
-    # stack = traceback.extract_stack()[-2]
-    # log.info(f"调用来源: {stack.filename}:{stack.lineno} -> {stack.name}")
-    # data = easy_sql_reader(SQL)
-    # log.info(f"查询结果: {len(data)} 条")
+    log.debug("SQL: %s", SQL)
     data = easy_sql_reader(SQL)
-    log.info(data)
     stack = traceback.extract_stack()[-2]
-    log.info(f"调用来源: {stack.filename}:{stack.lineno} -> {stack.name}")
-    log.info(f"查询结果: {len(data)} 条")
+    log.debug(
+        "SQL结果 %s条 caller=%s:%s -> %s",
+        len(data),
+        stack.filename,
+        stack.lineno,
+        stack.name,
+    )
     return data
 def asy_SQL_function3(SQL,tag):
     print(SQL)
@@ -736,7 +745,7 @@ def Alter_Column(TabName, TestItem):
         msg = "数据上传失败,测试项名称不可为空"
         raise Exception(msg)
     Tag = False
-    AlterStringGroup = ["ALTER TABLE "+ TabName +" ADD `"+ TestItem +"` VarChar(50) DEFAULT NULL","ALTER TABLE "+ TabName +" ADD `"+ TestItem +"_Result` VarChar(50) DEFAULT NULL"]
+    AlterStringGroup = ["ALTER TABLE "+ TabName +" ADD `"+ TestItem +"` TEXT DEFAULT NULL","ALTER TABLE "+ TabName +" ADD `"+ TestItem +"_Result` TEXT DEFAULT NULL"]
     for it in AlterStringGroup:
         if SQL_function4(it):
             Tag = True
@@ -2617,20 +2626,28 @@ def TRecv_SP(client_Ip, data, topic):
     except Exception as err:
         print(str(err))
         return
-def TRecv(client_Ip, data, topic):
+def GetStationNoFromPayload(data):
+    if not isinstance(data, dict):
+        return ""
+    station_no = data.get("Station_No")
+    if station_no:
+        return str(station_no)
+    for key in ("Check", "Bind", "DataUp", "BindPanId"):
+        nested = data.get(key)
+        if isinstance(nested, dict):
+            station_no = nested.get("Station_No")
+            if station_no:
+                return str(station_no)
+    return ""
+
+
+def TRecv(client_Ip, data, topic, client_id=""):
     # thread_name("TRecv")
     global lock2
-    # myip = socket.gethostbyname(socket.getfqdn(socket.gethostname()))
-    # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    # s.connect(('8.8.8.8', 80))
-    # myip = s.getsockname()[0]
-    # s.close()
-    myip = Getmyip_line()
-    print("Myip_Line:" + myip)
-    if myip == client_Ip:
-        print("---------------本地重复IP消息，pass--------------")
-        log.info("---------------本地重复IP消息，pass--------------")
-        log.info("TRecv接收并解析信息,本地重复IP消息" + str(data))
+    # MES 自己的 MQTT 客户端发出来的回环（看板 S002 等）才丢弃。
+    # 本机调试时真实机台也是 127.0.0.1，不能再按 IP 过滤。
+    if str(client_id).startswith("python-getmqtt"):
+        log.info("---------------MES自身MQTT回环，pass-------------- client=%s ip=%s data=%s", client_id, client_Ip, data)
         return
     if topic == "Msg2Station/ViewBoard":
         print("---------------来自看板的消息，不解析--------------")
@@ -2644,9 +2661,10 @@ def TRecv(client_Ip, data, topic):
     device_class = cache.get('DeviceClass', default=None)
     device_class_sp = cache.get('DeviceClass_SP', default=None)
     print(device_class_sp)
+    station_no = GetStationNoFromPayload(data)
     # 如果是SP系列机台单独处理(摄像头线体外的独立机台)
     for it in device_class_sp:
-        if it['EquipIP'] == client_Ip:
+        if it['EquipIP'] == client_Ip or (station_no and it['EquipNumber'] == station_no):
             print("------------------接收的信息是来自SP机台-------------------")
             log.info("------------------接收的信息是来自SP机台-------------------")
             print("lock2.acquire")
@@ -2661,14 +2679,24 @@ def TRecv(client_Ip, data, topic):
             return
     tag = False
     if device_class is not None:
-        for it in device_class:
-            tag = False
-            if it['EquipIP'] == client_Ip:
-                tag = True
-                equip_number = it['EquipNumber']
-                equip_topic = "Msg2Station/" + equip_number
-                print(equip_topic)
-                break
+        if station_no:
+            for it in device_class:
+                if it['EquipNumber'] == station_no:
+                    tag = True
+                    equip_number = it['EquipNumber']
+                    equip_topic = "Msg2Station/" + equip_number
+                    print(equip_topic)
+                    break
+        else:
+            # 报文未带 Station_No 时回退按 IP 认站（如 0x01）
+            for it in device_class:
+                if it['EquipIP'] == client_Ip:
+                    tag = True
+                    equip_number = it['EquipNumber']
+                    equip_topic = "Msg2Station/" + equip_number
+                    print(equip_topic)
+                    log.info("报文未带Station_No，回退按IP认站:" + equip_topic)
+                    break
         if tag is False:
             print("------------------接收的信息不是来自当前型号下的设备，不予解析-------------------")
             log.info("------------------接收的信息不是来自当前型号下的设备，不予解析-------------------")
@@ -2839,16 +2867,17 @@ def TRecv(client_Ip, data, topic):
                         msg = "Code:" + sn + " ordersn_tab 存在对应的信息"
                         raise Exception(msg)
                     # 检查工单型号 与 当前型号是否匹配    工单型号绑定
-                    SQL = "SELECT st_current_model FROM station_tab WHERE equipment_num = '" + stno + "' and gp_model = '" + current_model + "'"
-                    data = SQL_function3(SQL)
-                    st_current_model = data[0]['st_current_model']
-                    SQL = "SELECT * FROM planorder_partno_tab WHERE gp_model = '" + st_current_model + "'"
-                    data_model_partno = SQL_function3(SQL)
-                    SQL = "SELECT * FROM planorder_tab WHERE order_no = '" + current_order + "'"
-                    data_order_partno = SQL_function3(SQL)
-                    if not data_order_partno[0]['part_no'].upper() == data_model_partno[0]['BT_PART_NO'].upper():
-                        msg = "当前型号物料号与工单型号不匹配"
-                        raise Exception(msg)
+                    if Getorder_partno_check_flag():
+                        SQL = "SELECT st_current_model FROM station_tab WHERE equipment_num = '" + stno + "' and gp_model = '" + current_model + "'"
+                        data = SQL_function3(SQL)
+                        st_current_model = data[0]['st_current_model']
+                        SQL = "SELECT * FROM planorder_partno_tab WHERE gp_model = '" + st_current_model + "'"
+                        data_model_partno = SQL_function3(SQL)
+                        SQL = "SELECT * FROM planorder_tab WHERE order_no = '" + current_order + "'"
+                        data_order_partno = SQL_function3(SQL)
+                        if not data_order_partno[0]['part_no'].upper() == data_model_partno[0]['BT_PART_NO'].upper():
+                            msg = "当前型号物料号与工单型号不匹配"
+                            raise Exception(msg)
                     # 第一站check时检查当前sn码中物料号
                     SQL = "SELECT * FROM model_tab WHERE gp_model = '" + current_model + "'"
                     data = SQL_function3(SQL)
@@ -5004,26 +5033,19 @@ def TRecv(client_Ip, data, topic):
 
 
 def TConn(client_Id, client_Ip, client_Port, link):
-    print(">>>>>TConn")
-    log.info(">>>>>TConn")
-    # 上锁
     global lock
     warn_msg = ""
     lock.acquire()
-    log.info("lock.acquire")
     try:
         equip_connect = cache.get('EquipConnect', default=None)
         device_class = cache.get('DeviceClass', default=None)
-        log.info("equip_connect:" + str(equip_connect))
-        log.info("device_class:" + str(device_class))
+        log.debug("equip_connect:%s", equip_connect)
+        log.debug("device_class:%s", device_class)
         if equip_connect is None:
             equip_connect = {}
         if device_class is None:
             warn_msg = '[msg_operation] DeviceClass is None'
-            print(warn_msg)
             raise Exception(warn_msg)
-        print(equip_connect)
-        print(device_class)
 
         SQL = "SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '" + client_Ip + "'"
         data = SQL_function3(SQL)
@@ -5034,8 +5056,7 @@ def TConn(client_Id, client_Ip, client_Port, link):
             sta_num = 1
 
         if len(data) == 0:
-            print("未在设备表equipment_tab中找到该连接的设备信息")
-            log.info("未在设备表equipment_tab中找到该连接的设备信息")
+            log.warning("未在设备表equipment_tab中找到该连接的设备信息 ip=%s", client_Ip)
         elif len(data) == 1:
             # 发送给看板viewboard
             viewboard_topic = "Msg2Station/ViewBoard"
@@ -5046,11 +5067,9 @@ def TConn(client_Id, client_Ip, client_Port, link):
                 "Status": sta_num,  # 0正常  1断开  2故障  3上传MOM失败
                 "Message": ""
             }
-            # viewboard_data_send = str(json.dumps(viewboard_data_send))
             SendMessage2Station(viewboard_topic, viewboard_data_send)
         else:
-            print("在设备表equipment_tab中找到多个设备信息，请检查")
-            log.info("在设备表equipment_tab中找到多个设备信息，请检查")
+            log.warning("在设备表equipment_tab中找到多个设备信息，请检查 ip=%s", client_Ip)
 
         if equip_connect is not None:
             if link:
@@ -5061,9 +5080,7 @@ def TConn(client_Id, client_Ip, client_Port, link):
                 Cache_writer('EquipConnect', equip_connect, None)
         else:
             warn_msg = '[msg_operation] EquipConnect is None, can not record'
-            print(warn_msg)
             raise Exception(warn_msg)
-        print(equip_connect)
 
         if device_class is not None:
             tag = False
@@ -5076,30 +5093,29 @@ def TConn(client_Id, client_Ip, client_Port, link):
                 Cache_writer('DeviceClass', device_class, None)
             else:
                 warn_msg = '[msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备'
-                print(warn_msg)
                 raise Exception(warn_msg)
         else:
             warn_msg = '[msg_operation] DeviceClass is None ,can not change'
-            print(warn_msg)
             raise Exception(warn_msg)
-        print(device_class)
 
-        lock.release()
-        log.info("lock.release")
-        log.info("--------" + str(client_Ip) + "状态" + str(link) + "更新成功")
-        log.info("equip_connect:"  + str(equip_connect))
-        log.info("device_class:"  + str(device_class))
+        log.info(
+            "设备连接状态更新成功 id=%s ip=%s:%s link=%s",
+            client_Id,
+            client_Ip,
+            client_Port,
+            link,
+        )
     except Exception as err:
+        log.error("TConn失败 id=%s ip=%s: %s", client_Id, client_Ip, err)
+    finally:
         lock.release()
-        log.info("lock.release")
-        log.info(str(err))
 # 接收MQTT消息
-def Recv(client_Ip, data, topic):
+def Recv(client_Ip, data, topic, client_id=""):
     try:
         # thread_name("Recv")
         # future = threadPool.submit(TRecv, client_Ip, data, topic)
         # TRecv(client_Ip, data, topic)
-        t1 = threading.Thread(target=TRecv, args=(client_Ip, data, topic,))
+        t1 = threading.Thread(target=TRecv, args=(client_Ip, data, topic, client_id,))
         t1.start()
         return
     except Exception as err:
@@ -5107,7 +5123,7 @@ def Recv(client_Ip, data, topic):
 
 # 建立、断开了MQTT连接
 def Conn(client_Id, client_Ip, client_Port, link):
-    log.info(">>>>>>Conn")
+    log.debug("Conn id=%s ip=%s:%s link=%s", client_Id, client_Ip, client_Port, link)
     # t = Thread(target=TConn(client_Id, client_Ip, client_Port, link))
     # t.start()
     t1 = threading.Thread(target=TConn, args=(client_Id, client_Ip, client_Port, link,))

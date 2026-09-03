@@ -55,6 +55,10 @@ def main():
     GolbalGroup_Ini()
     formatter = "[%(asctime)s] :: %(levelname)s :: %(name)s :: %(message)s"
     logging.basicConfig(level=logging.INFO, format=formatter)
+    # 心跳包事件过于频繁，默认不打到 INFO
+    logging.getLogger("amqtt.broker.plugins.event_logger_plugin").setLevel(logging.WARNING)
+    logging.getLogger("transitions").setLevel(logging.WARNING)
+    logging.getLogger("transitions.core").setLevel(logging.WARNING)
 
 
     # asyncio.get_event_loop().run_until_complete(broker_coro())

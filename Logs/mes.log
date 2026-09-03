@@ -1,70 +1,471 @@
-[INFO]2026-08-25 15:19:27,012:12.0.37996,16280#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:19:27,013:13.0.37996,16280#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:19:27,036:36.0.37996,16280#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:19:27,037:37.0.37996,16280#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:19:28,990:990.0.37996,16280#>[client_connected]:415  ---------1 connected---------
-[INFO]2026-08-25 15:19:28,990:990.0.37996,16280#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
-[INFO]2026-08-25 15:19:28,993:993.0.37996,16280#>[client_connected]:437  ---------建立新连接时的设备信息---------
-[INFO]2026-08-25 15:19:28,994:994.0.37996,16280#>[client_connected]:438  python-getmqtt-84
-[INFO]2026-08-25 15:19:28,994:994.0.37996,16280#>[client_connected]:439  127.0.0.1
-[INFO]2026-08-25 15:19:28,995:995.0.37996,16280#>[client_connected]:440  64669
-[INFO]2026-08-25 15:19:28,995:995.0.37996,16280#>[Conn]:5110  >>>>>>Conn
-[INFO]2026-08-25 15:19:28,996:996.0.37996,15288#>[TConn]:5008  >>>>>TConn
-[INFO]2026-08-25 15:19:28,996:996.0.37996,15288#>[TConn]:5013  lock.acquire
-[INFO]2026-08-25 15:19:28,996:996.0.37996,15288#>[TConn]:5017  equip_connect:{}
-[INFO]2026-08-25 15:19:28,997:997.0.37996,15288#>[TConn]:5018  device_class:[{'EquipName': 'A站PCB上料', 'EquipNumber': 'ST01', 'EquipIP': '192.168.10.5', 'EquipSerial': '1', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'B站PCB锁附', 'EquipNumber': 'ST02', 'EquipIP': '192.168.10.11', 'EquipSerial': '2', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'C站plasma&点胶', 'EquipNumber': 'ST03', 'EquipIP': '192.168.10.16', 'EquipSerial': '3', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'D站双AA+单AA', 'EquipNumber': 'ST04', 'EquipIP': '192.168.10.21', 'EquipSerial': '4', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'F&G站AA下料+固化', 'EquipNumber': 'ST05', 'EquipIP': '192.168.10.37', 'EquipSerial': '5', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'M站气密', 'EquipNumber': 'ST09', 'EquipIP': '192.168.10.111', 'EquipSerial': '9', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'N站EOL1', 'EquipNumber': 'ST10', 'EquipIP': '192.168.10.116', 'EquipSerial': '10', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'O站EOL2', 'EquipNumber': 'ST11', 'EquipIP': '192.168.10.121', 'EquipSerial': '11', 'EquipStatus': False, 'EquipError': False}, {'EquipName': '标定', 'EquipNumber': 'ST12', 'EquipIP': '192.168.10.126', 'EquipSerial': '12', 'EquipStatus': False, 'EquipError': False}, {'EquipName': 'S站下料', 'EquipNumber': 'ST14', 'EquipIP': '192.168.10.150', 'EquipSerial': '14', 'EquipStatus': False, 'EquipError': False}]
-[INFO]2026-08-25 15:19:28,999:999.0.37996,15288#>[SQL_function3]:678  SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '127.0.0.1'
-[INFO]2026-08-25 15:19:29,026:26.0.37996,15288#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:19:29,027:27.0.37996,15288#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:19:29,028:28.0.37996,15288#>[SQL_function3]:688  []
-[INFO]2026-08-25 15:19:29,066:66.0.37996,15288#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\COMMON\msg_operation.py:5029 -> TConn
-[INFO]2026-08-25 15:19:29,066:66.0.37996,15288#>[SQL_function3]:691  查询结果: 0 条
-[INFO]2026-08-25 15:19:29,066:66.0.37996,15288#>[TConn]:5038  未在设备表equipment_tab中找到该连接的设备信息
-[INFO]2026-08-25 15:19:29,067:67.0.37996,15288#>[Cache_writer]:63  -----lock_cache.acquire
-[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[Cache_writer]:66  -----cache.set EquipConnect = {'python-getmqtt-84': '127.0.0.1:64669'}
-[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[Cache_writer]:68  -----lock_cache.release
-[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[TConn]:5094  lock.release
-[INFO]2026-08-25 15:19:29,068:68.0.37996,15288#>[TConn]:5095  [msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备
-[INFO]2026-08-25 15:21:09,387:387.0.37996,34900#>[login]:525  ----------------login-------------------
-[INFO]2026-08-25 15:21:09,388:388.0.37996,34900#>[SQL_function3]:678  select ID,userid from employee_tab WHERE userid='administrator'
-[INFO]2026-08-25 15:21:09,408:408.0.37996,34900#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:21:09,408:408.0.37996,34900#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:21:09,409:409.0.37996,34900#>[SQL_function3]:688  [{'ID': '1', 'userid': 'administrator'}]
-[INFO]2026-08-25 15:21:09,452:452.0.37996,34900#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:533 -> login
-[INFO]2026-08-25 15:21:09,452:452.0.37996,34900#>[SQL_function3]:691  查询结果: 1 条
-[INFO]2026-08-25 15:21:09,453:453.0.37996,34900#>[SQL_function3]:678   select ID,userid,password,level from employee_tab WHERE userid='administrator' and password='495051'
-[INFO]2026-08-25 15:21:09,480:480.0.37996,34900#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:21:09,480:480.0.37996,34900#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:21:09,481:481.0.37996,34900#>[SQL_function3]:688  []
-[INFO]2026-08-25 15:21:09,482:482.0.37996,34900#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:539 -> login
-[INFO]2026-08-25 15:21:09,482:482.0.37996,34900#>[SQL_function3]:691  查询结果: 0 条
-[INFO]2026-08-25 15:34:09,475:475.0.37996,23240#>[login]:525  ----------------login-------------------
-[INFO]2026-08-25 15:34:09,475:475.0.37996,23240#>[SQL_function3]:678  select ID,userid from employee_tab WHERE userid='a001'
-[INFO]2026-08-25 15:34:09,489:489.0.37996,23240#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:34:09,490:490.0.37996,23240#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:34:09,490:490.0.37996,23240#>[SQL_function3]:688  [{'ID': '8', 'userid': 'A001'}, {'ID': '30', 'userid': 'a001'}]
-[INFO]2026-08-25 15:34:09,491:491.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:533 -> login
-[INFO]2026-08-25 15:34:09,491:491.0.37996,23240#>[SQL_function3]:691  查询结果: 2 条
-[INFO]2026-08-25 15:34:09,491:491.0.37996,23240#>[SQL_function3]:678   select ID,userid,password,level from employee_tab WHERE userid='a001' and password='495051'
-[INFO]2026-08-25 15:34:09,497:497.0.37996,23240#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:34:09,497:497.0.37996,23240#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:34:09,498:498.0.37996,23240#>[SQL_function3]:688  [{'ID': '30', 'userid': 'a001', 'password': '495051', 'level': '1'}]
-[INFO]2026-08-25 15:34:09,500:500.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:539 -> login
-[INFO]2026-08-25 15:34:09,500:500.0.37996,23240#>[SQL_function3]:691  查询结果: 1 条
-[INFO]2026-08-25 15:34:09,501:501.0.37996,23240#>[Cache_writer]:63  -----lock_cache.acquire
-[INFO]2026-08-25 15:34:09,502:502.0.37996,23240#>[Cache_writer]:66  -----cache.set 5c38c1a8a05711f1a4ec14d424504d35 = {"userid": "a001", "username": "a001", "level": "1"}
-[INFO]2026-08-25 15:34:09,502:502.0.37996,23240#>[Cache_writer]:68  -----lock_cache.release
-[INFO]2026-08-25 15:34:09,503:503.0.37996,23240#>[SQL_function3]:678  SELECT Pass FROM model_tab WHERE gp_model = 'P01_4_H'
-[INFO]2026-08-25 15:34:09,508:508.0.37996,23240#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:34:09,509:509.0.37996,23240#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:34:09,509:509.0.37996,23240#>[SQL_function3]:688  [{'Pass': '19643'}]
-[INFO]2026-08-25 15:34:09,511:511.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:578 -> login
-[INFO]2026-08-25 15:34:09,511:511.0.37996,23240#>[SQL_function3]:691  查询结果: 1 条
-[INFO]2026-08-25 15:34:09,512:512.0.37996,23240#>[SQL_function3]:678  SELECT Fail FROM model_tab WHERE gp_model = 'P01_4_H'
-[INFO]2026-08-25 15:34:09,535:535.0.37996,23240#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:34:09,535:535.0.37996,23240#>[easy_sql_reader]:492  database_close
-[INFO]2026-08-25 15:34:09,536:536.0.37996,23240#>[SQL_function3]:688  [{'Fail': '4184'}]
-[INFO]2026-08-25 15:34:09,537:537.0.37996,23240#>[SQL_function3]:690  调用来源: C:\Users\28490\Desktop\瑞博MES后端\ManDe\views.py:585 -> login
-[INFO]2026-08-25 15:34:09,538:538.0.37996,23240#>[SQL_function3]:691  查询结果: 1 条
-[INFO]2026-08-25 15:34:13,406:406.0.37996,23240#>[easy_sql_reader]:483  database_success
-[INFO]2026-08-25 15:34:13,407:407.0.37996,23240#>[easy_sql_reader]:492  database_close
+[INFO]2026-09-03 10:18:50,271:271.0.45924,45896#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-09-03 10:18:50,274:274.0.45924,45896#>[acquire_connection]:91  Listener 'default': 1/60 connections acquired
+[INFO]2026-09-03 10:18:50,276:276.0.45924,45896#>[client_connected]:434  MQTT连接 client=python-getmqtt-88 127.0.0.1:50591
+[INFO]2026-09-03 10:18:50,280:280.0.45924,2972#>[on_connect]:85  MQTT客户端连接成功 client_id=python-getmqtt-88
+[INFO]2026-09-03 10:18:50,308:308.0.45924,3480#>[TConn]:5101  设备连接状态更新成功 id=python-getmqtt-88 ip=127.0.0.1:50591 link=True
+[INFO]2026-09-03 10:18:50,310:310.0.45924,70708#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "ST01", "Station_Name": "A站PCB上料", "Status": 0, "Message": ""}
+[INFO]2026-09-03 10:19:23,250:250.0.45924,45896#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-09-03 10:19:23,251:251.0.45924,45896#>[acquire_connection]:91  Listener 'default': 2/60 connections acquired
+[INFO]2026-09-03 10:19:23,261:261.0.45924,45896#>[client_connected]:434  MQTT连接 client=22ff3cc8-fe42-4b54-9811-2686b3acd5d3 127.0.0.1:50648
+[INFO]2026-09-03 10:19:23,274:274.0.45924,9740#>[TConn]:5101  设备连接状态更新成功 id=22ff3cc8-fe42-4b54-9811-2686b3acd5d3 ip=127.0.0.1:50648 link=True
+[INFO]2026-09-03 10:19:23,276:276.0.45924,80560#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "ST01", "Station_Name": "A站PCB上料", "Status": 0, "Message": ""}
+[INFO]2026-09-03 10:19:23,281:281.0.45924,45896#>[JudgeTopic]:638  JudgeTopic: Msg2Station/ST02
+[INFO]2026-09-03 10:19:23,281:281.0.45924,45896#>[JudgeTopic]:650  Msg2Station  ST02
+[INFO]2026-09-03 10:19:23,359:359.0.45924,45896#>[SQL_function4]:712  UPDATE sta_total set normal_num = 10 WHERE year = '2026' and month = '9' and stano = 'ST02'
+[INFO]2026-09-03 10:19:23,375:375.0.45924,45896#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:19:23,376:376.0.45924,45896#>[Time_Record_Counter]:925  normal_num:修改ST02: normal时间成功
+[INFO]2026-09-03 10:19:25,999:999.0.45924,45896#>[client_connected]:575  -----------断联部分处理---------22ff3cc8-fe42-4b54-9811-2686b3acd5d3----127.0.0.1
+[INFO]2026-09-03 10:19:25,999:999.0.45924,45896#>[client_connected]:581  22ff3cc8-fe42-4b54-9811-2686b3acd5d3 Result from wait_diconnect: None
+[INFO]2026-09-03 10:19:26,001:1.0.45924,45896#>[release_connection]:114  Listener 'default': 1/60 connections acquired
+[INFO]2026-09-03 10:19:26,007:7.0.45924,59896#>[TConn]:5101  设备连接状态更新成功 id=22ff3cc8-fe42-4b54-9811-2686b3acd5d3 ip=127.0.0.1:50648 link=False
+[INFO]2026-09-03 10:19:26,009:9.0.45924,71172#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "ST01", "Station_Name": "A站PCB上料", "Status": 1, "Message": ""}
+[INFO]2026-09-03 10:19:28,533:533.0.45924,45896#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-09-03 10:19:28,533:533.0.45924,45896#>[acquire_connection]:91  Listener 'default': 2/60 connections acquired
+[INFO]2026-09-03 10:19:28,544:544.0.45924,45896#>[client_connected]:434  MQTT连接 client=9817ff93-47ce-4640-a086-3dae2d7858df 127.0.0.1:50657
+[INFO]2026-09-03 10:19:28,550:550.0.45924,27192#>[TConn]:5101  设备连接状态更新成功 id=9817ff93-47ce-4640-a086-3dae2d7858df ip=127.0.0.1:50657 link=True
+[INFO]2026-09-03 10:19:28,552:552.0.45924,11260#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "ST01", "Station_Name": "A站PCB上料", "Status": 0, "Message": ""}
+[INFO]2026-09-03 10:19:28,581:581.0.45924,45896#>[JudgeTopic]:638  JudgeTopic: Msg2Station/ST02
+[INFO]2026-09-03 10:19:28,581:581.0.45924,45896#>[JudgeTopic]:650  Msg2Station  ST02
+[INFO]2026-09-03 10:19:28,608:608.0.45924,45896#>[SQL_function4]:712  UPDATE sta_total set normal_num = 11 WHERE year = '2026' and month = '9' and stano = 'ST02'
+[INFO]2026-09-03 10:19:28,636:636.0.45924,45896#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:19:28,636:636.0.45924,45896#>[Time_Record_Counter]:925  normal_num:修改ST02: normal时间成功
+[INFO]2026-09-03 10:19:40,364:364.0.45924,66700#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x02","Check":{"Serial_No":"asdsa","Station_No":"ST02","Gp_Model":"TEST001","Type":"0"}}
+[INFO]2026-09-03 10:19:40,365:365.0.45924,66700#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:19:40,418:418.0.45924,66700#>[TRecv]:3198  Code:asdsa ordersn_tab未找到对应的信息
+[INFO]2026-09-03 10:19:40,418:418.0.45924,66700#>[TRecv]:3208  {'Command': '0x02', 'Check_Result': {'Serial_No': 'asdsa', 'Result': 'NG', 'Message': 'Code:asdsa ordersn_tab未找到对应的信息'}}
+[INFO]2026-09-03 10:19:40,419:419.0.45924,66700#>[TRecv]:3212  lock2.release
+[INFO]2026-09-03 10:19:40,421:421.0.45924,74920#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab未找到对应的信息"}}
+[INFO]2026-09-03 10:19:40,421:421.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST02', 'data': bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')}] tasks=101>
+[INFO]2026-09-03 10:19:40,422:422.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,422:422.0.45924,45896#>[_run_broadcast]:1032  ---------disconnect _retain_broadcast_message---------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,422:422.0.45924,45896#>[_run_broadcast]:1058  client_id:9817ff93-47ce-4640-a086-3dae2d7858df
+[INFO]2026-09-03 10:19:40,422:422.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50657
+[INFO]2026-09-03 10:19:40,422:422.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:19:40,423:423.0.45924,45896#>[_run_broadcast]:1067  Task-338------Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,423:423.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-338' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:19:40,423:423.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')--qos2
+[INFO]2026-09-03 10:19:40,424:424.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:19:40,424:424.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,424:424.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:19:40,425:425.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,438:438.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,438:438.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:19:40,439:439.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:19:40,439:439.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,439:439.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "asdsa", "Result": "NG", "Message": "Code:asdsa ordersn_tab\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe5\xaf\xb9\xe5\xba\x94\xe7\x9a\x84\xe4\xbf\xa1\xe6\x81\xaf"}}')
+[INFO]2026-09-03 10:19:40,439:439.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:20:16,770:770.0.45924,45896#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-09-03 10:20:16,770:770.0.45924,45896#>[acquire_connection]:91  Listener 'default': 3/60 connections acquired
+[INFO]2026-09-03 10:20:16,781:781.0.45924,45896#>[client_connected]:434  MQTT连接 client=322906c7-608f-4796-84d7-28349bcd0ca2 127.0.0.1:50743
+[INFO]2026-09-03 10:20:16,790:790.0.45924,40084#>[TConn]:5101  设备连接状态更新成功 id=322906c7-608f-4796-84d7-28349bcd0ca2 ip=127.0.0.1:50743 link=True
+[INFO]2026-09-03 10:20:16,792:792.0.45924,42556#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "ST01", "Station_Name": "A站PCB上料", "Status": 0, "Message": ""}
+[INFO]2026-09-03 10:20:16,802:802.0.45924,45896#>[JudgeTopic]:638  JudgeTopic: Msg2Station/ST04
+[INFO]2026-09-03 10:20:16,802:802.0.45924,45896#>[JudgeTopic]:650  Msg2Station  ST04
+[INFO]2026-09-03 10:20:16,816:816.0.45924,45896#>[SQL_function4]:712  UPDATE sta_total set normal_num = 11 WHERE year = '2026' and month = '9' and stano = 'ST04'
+[INFO]2026-09-03 10:20:16,841:841.0.45924,45896#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:20:16,841:841.0.45924,45896#>[Time_Record_Counter]:925  normal_num:修改ST04: normal时间成功
+[INFO]2026-09-03 10:20:27,912:912.0.45924,45896#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-09-03 10:20:27,912:912.0.45924,45896#>[acquire_connection]:91  Listener 'default': 4/60 connections acquired
+[INFO]2026-09-03 10:20:27,922:922.0.45924,45896#>[client_connected]:434  MQTT连接 client=56c9a2ed-e5f8-49ad-acff-759143b1c909 127.0.0.1:50771
+[INFO]2026-09-03 10:20:27,941:941.0.45924,11428#>[TConn]:5101  设备连接状态更新成功 id=56c9a2ed-e5f8-49ad-acff-759143b1c909 ip=127.0.0.1:50771 link=True
+[INFO]2026-09-03 10:20:27,943:943.0.45924,26148#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "ST01", "Station_Name": "A站PCB上料", "Status": 0, "Message": ""}
+[INFO]2026-09-03 10:20:27,944:944.0.45924,45896#>[JudgeTopic]:638  JudgeTopic: Msg2Station/ST14
+[INFO]2026-09-03 10:20:27,944:944.0.45924,45896#>[JudgeTopic]:650  Msg2Station  ST14
+[INFO]2026-09-03 10:20:27,977:977.0.45924,45896#>[SQL_function4]:712  UPDATE sta_total set normal_num = 10 WHERE year = '2026' and month = '9' and stano = 'ST14'
+[INFO]2026-09-03 10:20:27,985:985.0.45924,45896#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:20:27,985:985.0.45924,45896#>[Time_Record_Counter]:925  normal_num:修改ST14: normal时间成功
+[INFO]2026-09-03 10:20:38,488:488.0.45924,45896#>[client_connected]:415  ---------1 connected---------
+[INFO]2026-09-03 10:20:38,488:488.0.45924,45896#>[acquire_connection]:91  Listener 'default': 5/60 connections acquired
+[INFO]2026-09-03 10:20:38,499:499.0.45924,45896#>[client_connected]:434  MQTT连接 client=58522b11-06d8-4fe6-97c4-20529a3bc5ad 127.0.0.1:50784
+[INFO]2026-09-03 10:20:38,518:518.0.45924,27304#>[TConn]:5101  设备连接状态更新成功 id=58522b11-06d8-4fe6-97c4-20529a3bc5ad ip=127.0.0.1:50784 link=True
+[INFO]2026-09-03 10:20:38,520:520.0.45924,87056#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "ST01", "Station_Name": "A站PCB上料", "Status": 0, "Message": ""}
+[INFO]2026-09-03 10:20:38,534:534.0.45924,45896#>[JudgeTopic]:638  JudgeTopic: Msg2Station/ST01
+[INFO]2026-09-03 10:20:38,534:534.0.45924,45896#>[JudgeTopic]:650  Msg2Station  ST01
+[INFO]2026-09-03 10:20:38,544:544.0.45924,45896#>[SQL_function4]:712  UPDATE sta_total set normal_num = 18 WHERE year = '2026' and month = '9' and stano = 'ST01'
+[INFO]2026-09-03 10:20:38,565:565.0.45924,45896#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:20:38,565:565.0.45924,45896#>[Time_Record_Counter]:925  normal_num:修改ST01: normal时间成功
+[INFO]2026-09-03 10:21:35,039:39.0.45924,25932#>[login]:525  ----------------login-------------------
+[INFO]2026-09-03 10:21:35,215:215.0.45924,49940#>[main]:738  菜单列表获取成功 group=8 menu=18
+[INFO]2026-09-03 10:25:12,461:461.0.45924,64220#>[login]:525  ----------------login-------------------
+[INFO]2026-09-03 10:25:12,595:595.0.45924,55352#>[main]:738  菜单列表获取成功 group=8 menu=18
+[INFO]2026-09-03 10:28:11,968:968.0.45924,10144#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x02","Check":{"Serial_No":"SN002","Station_No":"ST01","Gp_Model":"TEST001","Type":"0"}}
+[INFO]2026-09-03 10:28:11,969:969.0.45924,10144#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:28:12,070:70.0.45924,10144#>[Partno_check]:179  {'result': 'OK', 'msg': ''}
+[INFO]2026-09-03 10:28:12,097:97.0.45924,10144#>[SQL_function4]:712  UPDATE planorder_tab SET num_real = '2464',datetime = '2026-09-03 10:28:11.970278' WHERE order_no = 'OR260824000003'
+[INFO]2026-09-03 10:28:12,107:107.0.45924,10144#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:12,111:111.0.45924,10144#>[SQL_function4]:712  INSERT INTO qr_confrimation_tab (qr_code1,station_no,check_result,test_result,gp_model,check_time,part_no,part_batch) Value ('SN002','ST01','OK','NA','TEST001','2026-09-03 10:28:11.970278','','')
+[INFO]2026-09-03 10:28:12,124:124.0.45924,10144#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:12,124:124.0.45924,10144#>[SQL_function4]:712  INSERT INTO ordersn_tab (order_no,qr_code1,online_time,laststation_time,used,result,current_station) Value ('OR260824000003','SN002','2026-09-03 10:28:11.970278','2026-09-03 10:28:11.970278','True','','ST01')
+[INFO]2026-09-03 10:28:12,145:145.0.45924,10144#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:12,146:146.0.45924,10144#>[TRecv]:3191  {'Command': '0x02', 'Check_Result': {'Serial_No': 'SN002', 'Result': 'OK', 'Message': 'Code:SN002 校验成功,添加成功'}}
+[INFO]2026-09-03 10:28:12,146:146.0.45924,10144#>[TRecv]:3195  lock2.release
+[INFO]2026-09-03 10:28:12,148:148.0.45924,42916#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 校验成功,添加成功"}}
+[INFO]2026-09-03 10:28:12,148:148.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST01--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST01', 'data': bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')}] tasks=1075>
+[INFO]2026-09-03 10:28:12,149:149.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST01--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:12,149:149.0.45924,45896#>[_run_broadcast]:1058  client_id:58522b11-06d8-4fe6-97c4-20529a3bc5ad
+[INFO]2026-09-03 10:28:12,149:149.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50784
+[INFO]2026-09-03 10:28:12,149:149.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:28:12,150:150.0.45924,45896#>[_run_broadcast]:1067  Task-3485------Msg2Station/ST01--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:12,150:150.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-3485' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:28:12,150:150.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST01--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--qos2
+[INFO]2026-09-03 10:28:12,150:150.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:28:12,150:150.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:12,151:151.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:28:12,151:151.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:12,175:175.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:12,175:175.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:28:12,176:176.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:28:12,176:176.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:12,176:176.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:12,176:176.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:28:39,931:931.0.45924,69544#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x04","DataUp":{"Serial_No":"SN002","Type":"0","Station_No":"ST01","SiteName":"ST01","Test_Result":"OK","Gp_Model":"TEST001","Judge_Code":[],"Start_Time":"","End_Time":"","Test_Value":[{"Test_Item":"TI1","Value":"0.5","Result":"OK","Upper":"1","Lower":"0"},{"Test_Item":"TI2","Value":"1.5","Result":"OK","Upper":"2","Lower":"1"}]}}
+[INFO]2026-09-03 10:28:39,932:932.0.45924,69544#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:28:39,989:989.0.45924,69544#>[SQL_function4]:712  DELETE FROM ST01_test_tab WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:28:40,022:22.0.45924,69544#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:40,023:23.0.45924,69544#>[SQL_function4]:712  UPDATE qr_confrimation_tab set test_result = 'OK', test_time = '2026-09-03 10:28:39.932985', site_name = 'ST01' WHERE qr_code1 = 'SN002' and station_no = 'ST01' and check_result = 'OK' and gp_model = 'TEST001'
+[INFO]2026-09-03 10:28:40,031:31.0.45924,69544#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:40,031:31.0.45924,69544#>[SQL_function4]:712  UPDATE ordersn_tab SET retest_num = 0 WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:28:40,050:50.0.45924,69544#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:40,051:51.0.45924,69544#>[TRecv]:3906  ordersn_tab已更新(retest_num=0)
+[INFO]2026-09-03 10:28:40,060:60.0.45924,69544#>[SQL_function4]:712  INSERT INTO ST01_test_tab (qr_code1,station_no,test_result,gp_model,judge_code,start_time,end_time) values ('SN002','ST01','OK','TEST001','','','')
+[INFO]2026-09-03 10:28:40,070:70.0.45924,69544#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:40,071:71.0.45924,69544#>[SQL_function4]:712  UPDATE ST01_test_tab set TI1='0.5',TI1_Result='OK',TI2='1.5',TI2_Result='OK' WHERE qr_code1 = 'SN002' and  station_no = 'ST01'
+[INFO]2026-09-03 10:28:40,100:100.0.45924,69544#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:28:40,100:100.0.45924,69544#>[TRecv]:4174  {'Command': '0x04', 'DataUp_Result': {'Serial_No': 'SN002', 'Station_No': 'ST01', 'Result': 'OK', 'Message': '测试记录更新成功'}}
+[INFO]2026-09-03 10:28:40,101:101.0.45924,69544#>[TRecv]:4180  lock2.release
+[INFO]2026-09-03 10:28:40,102:102.0.45924,34616#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "测试记录更新成功"}}
+[INFO]2026-09-03 10:28:40,103:103.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST01--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST01', 'data': bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')}] tasks=1134>
+[INFO]2026-09-03 10:28:40,103:103.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST01--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:40,103:103.0.45924,45896#>[_run_broadcast]:1058  client_id:58522b11-06d8-4fe6-97c4-20529a3bc5ad
+[INFO]2026-09-03 10:28:40,104:104.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50784
+[INFO]2026-09-03 10:28:40,104:104.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:28:40,104:104.0.45924,45896#>[_run_broadcast]:1067  Task-3691------Msg2Station/ST01--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:40,104:104.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-3691' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:28:40,104:104.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST01--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')--qos2
+[INFO]2026-09-03 10:28:40,104:104.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:28:40,105:105.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:40,105:105.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:28:40,105:105.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:40,111:111.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:40,111:111.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:28:40,112:112.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:28:40,112:112.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:40,112:112.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST01", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:28:40,112:112.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:29:06,997:997.0.45924,37864#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x02","Check":{"Serial_No":"SN002","Station_No":"ST02","Gp_Model":"TEST001","Type":"0"}}
+[INFO]2026-09-03 10:29:06,998:998.0.45924,37864#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:29:07,049:49.0.45924,37864#>[SQL_function4]:712  UPDATE ordersn_tab SET laststation_time = '2026-09-03 10:29:06.998852', current_station = 'ST02' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:29:07,057:57.0.45924,37864#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:07,058:58.0.45924,37864#>[SQL_function4]:712  INSERT INTO qr_confrimation_tab (qr_code1,station_no,check_result,test_result,gp_model,check_time,part_no,part_batch) Value ('SN002','ST02','OK','NA','TEST001','2026-09-03 10:29:06.998852','','')
+[INFO]2026-09-03 10:29:07,078:78.0.45924,37864#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:07,080:80.0.45924,37864#>[SQL_function4]:712  UPDATE ordersn_tab SET laststation_time = '2026-09-03 10:29:06.998852' , current_station = 'ST02' WHERE qr_code1 = 'SN002' AND order_no = 'OR260824000003'
+[INFO]2026-09-03 10:29:07,106:106.0.45924,37864#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:07,106:106.0.45924,37864#>[TRecv]:3191  {'Command': '0x02', 'Check_Result': {'Serial_No': 'SN002', 'Result': 'OK', 'Message': 'Code:SN002 校验成功,添加成功'}}
+[INFO]2026-09-03 10:29:07,107:107.0.45924,37864#>[TRecv]:3195  lock2.release
+[INFO]2026-09-03 10:29:07,108:108.0.45924,64140#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 校验成功,添加成功"}}
+[INFO]2026-09-03 10:29:07,108:108.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST02', 'data': bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')}] tasks=1174>
+[INFO]2026-09-03 10:29:07,108:108.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,110:110.0.45924,45896#>[_run_broadcast]:1032  ---------disconnect _retain_broadcast_message---------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,110:110.0.45924,45896#>[_run_broadcast]:1058  client_id:9817ff93-47ce-4640-a086-3dae2d7858df
+[INFO]2026-09-03 10:29:07,110:110.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50657
+[INFO]2026-09-03 10:29:07,110:110.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:29:07,110:110.0.45924,45896#>[_run_broadcast]:1067  Task-3859------Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,110:110.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-3859' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:29:07,111:111.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST02--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--qos2
+[INFO]2026-09-03 10:29:07,111:111.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:29:07,111:111.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,111:111.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:29:07,111:111.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------2----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,120:120.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------2----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,120:120.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:29:07,121:121.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:29:07,121:121.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------2----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,121:121.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------2----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:07,121:121.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:29:28,682:682.0.45924,38392#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x03","Bind":{"Pcba1":"","Pcba2":"","Lens":"LENS002","Qr_code1":"SN002","Qr_code2":"","Stand":"","Station_No":"ST02","Gp_Model":"TEST001"}}
+[INFO]2026-09-03 10:29:28,683:683.0.45924,38392#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:29:28,707:707.0.45924,38392#>[Partno_check]:179  {'result': 'OK', 'msg': ''}
+[INFO]2026-09-03 10:29:28,716:716.0.45924,38392#>[SQL_function4]:712  UPDATE qr_confrimation_tab SET lens = 'LENS002' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:29:28,725:725.0.45924,38392#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:28,751:751.0.45924,38392#>[SQL_function4]:712  UPDATE qr_confrimation_tab SET part_no = '',part_batch = '' WHERE qr_code1 = 'SN002' and station_no = 'ST02'
+[INFO]2026-09-03 10:29:28,764:764.0.45924,38392#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:28,769:769.0.45924,38392#>[SQL_function4]:712  INSERT INTO ST02_test_tab (qr_code1,station_no,gp_model) values ('SN002','ST02','TEST001')
+[INFO]2026-09-03 10:29:28,799:799.0.45924,38392#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:28,804:804.0.45924,38392#>[SQL_function4]:712  INSERT INTO qr_bind_tab (qr_code1,lens,gp_model) values ('SN002','LENS002','TEST001')
+[INFO]2026-09-03 10:29:28,829:829.0.45924,38392#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:28,834:834.0.45924,38392#>[SQL_function4]:712  UPDATE ordersn_tab SET lens = 'LENS002' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:29:28,842:842.0.45924,38392#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:28,842:842.0.45924,38392#>[PassAfterBind]:73  ---PassAfterBind
+[INFO]2026-09-03 10:29:28,847:847.0.45924,38392#>[TRecv]:3699  PassAfterBind Fail
+[INFO]2026-09-03 10:29:28,847:847.0.45924,38392#>[TRecv]:3742  {'Command': '0x03', 'Bind_Result': {'Result': 'OK', 'Type': '2', 'Message': '绑定成功,特殊站点出站失败'}}
+[INFO]2026-09-03 10:29:28,849:849.0.45924,38392#>[TRecv]:3746  lock2.release
+[INFO]2026-09-03 10:29:28,850:850.0.45924,49596#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "绑定成功,特殊站点出站失败"}}
+[INFO]2026-09-03 10:29:28,850:850.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST02--bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST02', 'data': bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')}] tasks=1214>
+[INFO]2026-09-03 10:29:28,851:851.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST02--bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,851:851.0.45924,45896#>[_run_broadcast]:1032  ---------disconnect _retain_broadcast_message---------bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,851:851.0.45924,45896#>[_run_broadcast]:1058  client_id:9817ff93-47ce-4640-a086-3dae2d7858df
+[INFO]2026-09-03 10:29:28,851:851.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50657
+[INFO]2026-09-03 10:29:28,852:852.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:29:28,852:852.0.45924,45896#>[_run_broadcast]:1067  Task-4019------Msg2Station/ST02--bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,852:852.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-4019' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:29:28,852:852.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST02--bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')--qos2
+[INFO]2026-09-03 10:29:28,852:852.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:29:28,853:853.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,853:853.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:29:28,853:853.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------3----------bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,860:860.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------3----------bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,861:861.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:29:28,861:861.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:29:28,861:861.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------3----------bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,861:861.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------3----------bytearray(b'{"Command": "0x03", "Bind_Result": {"Result": "OK", "Type": "2", "Message": "\xe7\xbb\x91\xe5\xae\x9a\xe6\x88\x90\xe5\x8a\x9f,\xe7\x89\xb9\xe6\xae\x8a\xe7\xab\x99\xe7\x82\xb9\xe5\x87\xba\xe7\xab\x99\xe5\xa4\xb1\xe8\xb4\xa5"}}')
+[INFO]2026-09-03 10:29:28,861:861.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:29:50,634:634.0.45924,32712#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x04","DataUp":{"Serial_No":"SN002","Type":"0","Station_No":"ST02","SiteName":"ST01","Test_Result":"OK","Gp_Model":"TEST001","Judge_Code":[],"Start_Time":"","End_Time":"","Test_Value":[{"Test_Item":"TI3","Value":"0.5","Result":"OK","Upper":"1","Lower":"0"},{"Test_Item":"TI4","Value":"1.5","Result":"OK","Upper":"2","Lower":"1"}]}}
+[INFO]2026-09-03 10:29:50,636:636.0.45924,32712#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:29:50,665:665.0.45924,32712#>[SQL_function4]:712  DELETE FROM ST02_test_tab WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:29:50,685:685.0.45924,32712#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:50,686:686.0.45924,32712#>[SQL_function4]:712  UPDATE qr_confrimation_tab set test_result = 'OK', test_time = '2026-09-03 10:29:50.636031', site_name = 'ST01' WHERE qr_code1 = 'SN002' and station_no = 'ST02' and check_result = 'OK' and gp_model = 'TEST001'
+[INFO]2026-09-03 10:29:50,715:715.0.45924,32712#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:50,715:715.0.45924,32712#>[SQL_function4]:712  UPDATE ordersn_tab SET retest_num = 0 WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:29:50,743:743.0.45924,32712#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:50,743:743.0.45924,32712#>[TRecv]:3906  ordersn_tab已更新(retest_num=0)
+[INFO]2026-09-03 10:29:50,750:750.0.45924,32712#>[SQL_function4]:712  INSERT INTO ST02_test_tab (qr_code1,station_no,test_result,gp_model,judge_code,start_time,end_time) values ('SN002','ST02','OK','TEST001','','','')
+[INFO]2026-09-03 10:29:50,757:757.0.45924,32712#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:50,758:758.0.45924,32712#>[SQL_function4]:712  UPDATE ST02_test_tab set TI3='0.5',TI3_Result='OK',TI4='1.5',TI4_Result='OK' WHERE qr_code1 = 'SN002' and  station_no = 'ST02'
+[INFO]2026-09-03 10:29:50,764:764.0.45924,32712#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:29:50,765:765.0.45924,32712#>[TRecv]:4174  {'Command': '0x04', 'DataUp_Result': {'Serial_No': 'SN002', 'Station_No': 'ST02', 'Result': 'OK', 'Message': '测试记录更新成功'}}
+[INFO]2026-09-03 10:29:50,765:765.0.45924,32712#>[TRecv]:4180  lock2.release
+[INFO]2026-09-03 10:29:50,767:767.0.45924,43404#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "测试记录更新成功"}}
+[INFO]2026-09-03 10:29:50,767:767.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST02--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST02', 'data': bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')}] tasks=1273>
+[INFO]2026-09-03 10:29:50,768:768.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST02--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,768:768.0.45924,45896#>[_run_broadcast]:1032  ---------disconnect _retain_broadcast_message---------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,768:768.0.45924,45896#>[_run_broadcast]:1058  client_id:9817ff93-47ce-4640-a086-3dae2d7858df
+[INFO]2026-09-03 10:29:50,769:769.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50657
+[INFO]2026-09-03 10:29:50,769:769.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:29:50,769:769.0.45924,45896#>[_run_broadcast]:1067  Task-4209------Msg2Station/ST02--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,769:769.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-4209' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:29:50,769:769.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST02--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')--qos2
+[INFO]2026-09-03 10:29:50,770:770.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:29:50,770:770.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,770:770.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:29:50,771:771.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------4----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,778:778.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------4----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,778:778.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:29:50,779:779.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:29:50,779:779.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------4----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,779:779.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------4----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST02", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:29:50,779:779.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:30:32,030:30.0.45924,79504#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x02","Check":{"Serial_No":"SN002","Station_No":"ST04","Gp_Model":"TEST001","Type":"0"}}
+[INFO]2026-09-03 10:30:32,031:31.0.45924,79504#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:30:32,107:107.0.45924,79504#>[SQL_function4]:712  UPDATE ordersn_tab SET laststation_time = '2026-09-03 10:30:32.031275', current_station = 'ST04' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:30:32,114:114.0.45924,79504#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:32,114:114.0.45924,79504#>[SQL_function4]:712  INSERT INTO qr_confrimation_tab (qr_code1,station_no,check_result,test_result,gp_model,check_time,part_no,part_batch) Value ('SN002','ST04','OK','NA','TEST001','2026-09-03 10:30:32.031275','','')
+[INFO]2026-09-03 10:30:32,141:141.0.45924,79504#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:32,142:142.0.45924,79504#>[SQL_function4]:712  UPDATE qr_confrimation_tab SET lens = 'LENS002' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:30:32,149:149.0.45924,79504#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:32,149:149.0.45924,79504#>[SQL_function4]:712  UPDATE ordersn_tab SET laststation_time = '2026-09-03 10:30:32.031275' , current_station = 'ST04' WHERE qr_code1 = 'SN002' AND order_no = 'OR260824000003'
+[INFO]2026-09-03 10:30:32,152:152.0.45924,79504#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:32,152:152.0.45924,79504#>[TRecv]:3191  {'Command': '0x02', 'Check_Result': {'Serial_No': 'SN002', 'Result': 'OK', 'Message': 'Code:SN002 校验成功,添加成功'}}
+[INFO]2026-09-03 10:30:32,153:153.0.45924,79504#>[TRecv]:3195  lock2.release
+[INFO]2026-09-03 10:30:32,154:154.0.45924,37144#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 校验成功,添加成功"}}
+[INFO]2026-09-03 10:30:32,154:154.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST04--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST04', 'data': bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')}] tasks=1351>
+[INFO]2026-09-03 10:30:32,154:154.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST04--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:32,154:154.0.45924,45896#>[_run_broadcast]:1058  client_id:322906c7-608f-4796-84d7-28349bcd0ca2
+[INFO]2026-09-03 10:30:32,154:154.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50743
+[INFO]2026-09-03 10:30:32,156:156.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:30:32,156:156.0.45924,45896#>[_run_broadcast]:1067  Task-4485------Msg2Station/ST04--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:32,156:156.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-4485' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:30:32,156:156.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST04--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--qos2
+[INFO]2026-09-03 10:30:32,156:156.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:30:32,156:156.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:32,157:157.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:30:32,157:157.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:32,181:181.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:32,181:181.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:30:32,182:182.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:30:32,182:182.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:32,182:182.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:32,182:182.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:30:53,056:56.0.45924,67364#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x04","DataUp":{"Serial_No":"SN002","Type":"0","Station_No":"ST04","SiteName":"ST04","Test_Result":"OK","Gp_Model":"TEST001","Judge_Code":[],"Start_Time":"","End_Time":"","Test_Value":[{"Test_Item":"TI5","Value":"0.5","Result":"OK","Upper":"1","Lower":"0"},{"Test_Item":"TI6","Value":"1.5","Result":"OK","Upper":"2","Lower":"1"}]}}
+[INFO]2026-09-03 10:30:53,057:57.0.45924,67364#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:30:53,068:68.0.45924,67364#>[SQL_function4]:712  DELETE FROM ST04_test_tab WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:30:53,072:72.0.45924,67364#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:53,073:73.0.45924,67364#>[SQL_function4]:712  UPDATE qr_confrimation_tab set test_result = 'OK', test_time = '2026-09-03 10:30:53.057980', site_name = 'ST04' WHERE qr_code1 = 'SN002' and station_no = 'ST04' and check_result = 'OK' and gp_model = 'TEST001'
+[INFO]2026-09-03 10:30:53,081:81.0.45924,67364#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:53,081:81.0.45924,67364#>[SQL_function4]:712  UPDATE ordersn_tab SET retest_num = 0 WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:30:53,085:85.0.45924,67364#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:53,085:85.0.45924,67364#>[TRecv]:3906  ordersn_tab已更新(retest_num=0)
+[INFO]2026-09-03 10:30:53,092:92.0.45924,67364#>[SQL_function4]:712  INSERT INTO ST04_test_tab (qr_code1,station_no,test_result,gp_model,judge_code,start_time,end_time) values ('SN002','ST04','OK','TEST001','','','')
+[INFO]2026-09-03 10:30:53,123:123.0.45924,67364#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:53,124:124.0.45924,67364#>[SQL_function4]:712  UPDATE ST04_test_tab set TI5='0.5',TI5_Result='OK',TI6='1.5',TI6_Result='OK' WHERE qr_code1 = 'SN002' and  station_no = 'ST04'
+[INFO]2026-09-03 10:30:53,154:154.0.45924,67364#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:30:53,155:155.0.45924,67364#>[TRecv]:4174  {'Command': '0x04', 'DataUp_Result': {'Serial_No': 'SN002', 'Station_No': 'ST04', 'Result': 'OK', 'Message': '测试记录更新成功'}}
+[INFO]2026-09-03 10:30:53,156:156.0.45924,67364#>[TRecv]:4180  lock2.release
+[INFO]2026-09-03 10:30:53,157:157.0.45924,13964#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "测试记录更新成功"}}
+[INFO]2026-09-03 10:30:53,157:157.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST04--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST04', 'data': bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')}] tasks=1391>
+[INFO]2026-09-03 10:30:53,158:158.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST04--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:53,158:158.0.45924,45896#>[_run_broadcast]:1058  client_id:322906c7-608f-4796-84d7-28349bcd0ca2
+[INFO]2026-09-03 10:30:53,158:158.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50743
+[INFO]2026-09-03 10:30:53,158:158.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:30:53,159:159.0.45924,45896#>[_run_broadcast]:1067  Task-4645------Msg2Station/ST04--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:53,159:159.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-4645' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:30:53,159:159.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST04--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')--qos2
+[INFO]2026-09-03 10:30:53,159:159.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:30:53,159:159.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:53,160:160.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:30:53,160:160.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:53,165:165.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:53,165:165.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:30:53,166:166.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:30:53,166:166.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:53,166:166.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST04", "Result": "OK", "Message": "\xe6\xb5\x8b\xe8\xaf\x95\xe8\xae\xb0\xe5\xbd\x95\xe6\x9b\xb4\xe6\x96\xb0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:30:53,166:166.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:31:23,998:998.0.45924,12424#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x02","Check":{"Serial_No":"SN002","Station_No":"ST14","Gp_Model":"TEST001","Type":"0"}}
+[INFO]2026-09-03 10:31:23,999:999.0.45924,12424#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:31:24,056:56.0.45924,12424#>[SQL_function4]:712  UPDATE ordersn_tab SET laststation_time = '2026-09-03 10:31:23.999494', current_station = 'ST14' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:31:24,064:64.0.45924,12424#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:24,064:64.0.45924,12424#>[SQL_function4]:712  INSERT INTO qr_confrimation_tab (qr_code1,station_no,check_result,test_result,gp_model,check_time,part_no,part_batch) Value ('SN002','ST14','OK','NA','TEST001','2026-09-03 10:31:23.999494','','')
+[INFO]2026-09-03 10:31:24,089:89.0.45924,12424#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:24,092:92.0.45924,12424#>[SQL_function4]:712  UPDATE qr_confrimation_tab SET lens = 'LENS002' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:31:24,099:99.0.45924,12424#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:24,099:99.0.45924,12424#>[SQL_function4]:712  UPDATE ordersn_tab SET laststation_time = '2026-09-03 10:31:23.999494' , current_station = 'ST14' WHERE qr_code1 = 'SN002' AND order_no = 'OR260824000003'
+[INFO]2026-09-03 10:31:24,118:118.0.45924,12424#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:24,118:118.0.45924,12424#>[TRecv]:3191  {'Command': '0x02', 'Check_Result': {'Serial_No': 'SN002', 'Result': 'OK', 'Message': 'Code:SN002 校验成功,添加成功'}}
+[INFO]2026-09-03 10:31:24,119:119.0.45924,12424#>[TRecv]:3195  lock2.release
+[INFO]2026-09-03 10:31:24,121:121.0.45924,28424#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 校验成功,添加成功"}}
+[INFO]2026-09-03 10:31:24,121:121.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST14--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST14', 'data': bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')}] tasks=1450>
+[INFO]2026-09-03 10:31:24,121:121.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST14--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:31:24,121:121.0.45924,45896#>[_run_broadcast]:1058  client_id:56c9a2ed-e5f8-49ad-acff-759143b1c909
+[INFO]2026-09-03 10:31:24,122:122.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50771
+[INFO]2026-09-03 10:31:24,122:122.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:31:24,122:122.0.45924,45896#>[_run_broadcast]:1067  Task-4867------Msg2Station/ST14--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:31:24,122:122.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-4867' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:31:24,122:122.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST14--bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')--qos2
+[INFO]2026-09-03 10:31:24,123:123.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:31:24,123:123.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:31:24,123:123.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:31:24,123:123.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:31:24,144:144.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:31:24,144:144.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:31:24,144:144.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:31:24,145:145.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:31:24,145:145.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------1----------bytearray(b'{"Command": "0x02", "Check_Result": {"Serial_No": "SN002", "Result": "OK", "Message": "Code:SN002 \xe6\xa0\xa1\xe9\xaa\x8c\xe6\x88\x90\xe5\x8a\x9f,\xe6\xb7\xbb\xe5\x8a\xa0\xe6\x88\x90\xe5\x8a\x9f"}}')
+[INFO]2026-09-03 10:31:24,145:145.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------
+[INFO]2026-09-03 10:31:57,910:910.0.45924,38360#>[TRecv]:2656  TRecv接收并解析信息{"Command":"0x04","DataUp":{"Serial_No":"SN002","Type":"0","Station_No":"ST14","SiteName":"ST14","Test_Result":"OK","Gp_Model":"TEST001","Judge_Code":[],"Start_Time":"","End_Time":"","Test_Value":[]}}
+[INFO]2026-09-03 10:31:57,911:911.0.45924,38360#>[TRecv]:2712  lock2.acquire
+[INFO]2026-09-03 10:31:57,923:923.0.45924,38360#>[SQL_function4]:712  DELETE FROM ST14_test_tab WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:31:57,927:927.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:57,928:928.0.45924,38360#>[SQL_function4]:712  UPDATE qr_confrimation_tab set test_result = 'OK', test_time = '2026-09-03 10:31:57.911523', site_name = 'ST14' WHERE qr_code1 = 'SN002' and station_no = 'ST14' and check_result = 'OK' and gp_model = 'TEST001'
+[INFO]2026-09-03 10:31:57,935:935.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:57,935:935.0.45924,38360#>[SQL_function4]:712  UPDATE ordersn_tab SET retest_num = 0 WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:31:57,940:940.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:57,940:940.0.45924,38360#>[TRecv]:3906  ordersn_tab已更新(retest_num=0)
+[INFO]2026-09-03 10:31:57,948:948.0.45924,38360#>[SQL_function4]:712  INSERT INTO ST14_test_tab (qr_code1,station_no,test_result,gp_model,judge_code,start_time,end_time) values ('SN002','ST14','OK','TEST001','','','')
+[INFO]2026-09-03 10:31:57,957:957.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:57,962:962.0.45924,38360#>[SQL_function4]:712  INSERT INTO product_statistics_tab (qr_code1,qr_code2,pcba_code1,pcba_code2,test_result,gp_model) Values ('SN002','','','','OK','TEST001')
+[INFO]2026-09-03 10:31:57,971:971.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,005:5.0.45924,38360#>[SQL_function2]:688  True
+[INFO]2026-09-03 10:31:58,006:6.0.45924,38360#>[SQL_function4]:712  UPDATE ordersn_tab SET result = 'OK', offline_time = '2026-09-03 10:31:57.911523' WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:31:58,012:12.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,080:80.0.45924,38360#>[TRecv]:4032  ---------------------- Threads start
+[INFO]2026-09-03 10:31:58,080:80.0.45924,38360#>[Getuuid_num]:298  Getuuid_num lock_uuid.acquire
+[INFO]2026-09-03 10:31:58,085:85.0.45924,38360#>[SQL_function4]:712  UPDATE mom_setting SET uuid_num = '0', sn_num = '0', sn_num_stand = '0'
+[INFO]2026-09-03 10:31:58,090:90.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,109:109.0.45924,38360#>[SQL_function4]:712  UPDATE mom_setting SET uuid_num = '1'
+[INFO]2026-09-03 10:31:58,116:116.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,116:116.0.45924,38360#>[Getuuid_num]:304  Getuuid_num lock_uuid.release
+[INFO]2026-09-03 10:31:58,117:117.0.45924,38360#>[SQL_function4]:712  SELECT * FROM qr_confrimation_tab WHERE qr_code1 = 'SN002'
+[INFO]2026-09-03 10:31:58,121:121.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,124:124.0.45924,38360#>[TRecv]:4085  ---------------------- Threads create
+[INFO]2026-09-03 10:31:58,124:124.0.45924,38360#>[Getuuid_num]:298  Getuuid_num lock_uuid.acquire
+[INFO]2026-09-03 10:31:58,124:124.0.45924,24792#>[SendMessage2MOM]:408  >>>>>SendMessage2MOM
+[INFO]2026-09-03 10:31:58,126:126.0.45924,24792#>[SendMessage2MOM]:409  http://10.246.140.225:9000/mes.asmx/ProcessInfo
+[INFO]2026-09-03 10:31:58,126:126.0.45924,24792#>[SendMessage2MOM]:410  {'UUID': '20260903L2000000', 'STATION_NO': 'ST01-SXTMZ02', 'CODE': '100', 'OFFLINE_TIME': '2026-09-03 10:28:40', 'WORK_TIME': 28, 'K_PART_NO': '', 'K_PART_BATCH': '', 'Q_PART_NO': '', 'Q_PART_BATCH': '', 'J_PART_NO': '', 'J_PART_BATCH': '', 'H_PART_NO': '', 'H_PART_BATCH': '', 'F_PART_NO': '', 'F_PART_BATCH': '', 'L_PART_NO': '', 'L_PART_BATCH': '', 'Z_PART_NO': '', 'Z_PART_BATCH': '', 'PCBA_1': '', 'PCBA_2': '', 'SN': 'SN002', 'PART_NO': '3609F003992G0A00', 'STATION_STATUS': 'OK'}
+[INFO]2026-09-03 10:31:58,130:130.0.45924,38360#>[SQL_function4]:712  UPDATE mom_setting SET uuid_num = '2'
+[INFO]2026-09-03 10:31:58,158:158.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,158:158.0.45924,38360#>[Getuuid_num]:304  Getuuid_num lock_uuid.release
+[INFO]2026-09-03 10:31:58,159:159.0.45924,38360#>[SQL_function4]:712  SELECT * FROM planorder_tab WHERE order_no = 'OR260824000003'
+[INFO]2026-09-03 10:31:58,164:164.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,169:169.0.45924,38360#>[TRecv]:4085  ---------------------- Threads create
+[INFO]2026-09-03 10:31:58,169:169.0.45924,65748#>[SendMessage2MOM]:408  >>>>>SendMessage2MOM
+[INFO]2026-09-03 10:31:58,169:169.0.45924,38360#>[Getuuid_num]:298  Getuuid_num lock_uuid.acquire
+[INFO]2026-09-03 10:31:58,170:170.0.45924,65748#>[SendMessage2MOM]:409  http://10.246.140.225:9000/mes.asmx/ProcessInfo
+[INFO]2026-09-03 10:31:58,170:170.0.45924,65748#>[SendMessage2MOM]:410  {'UUID': '20260903L2000001', 'STATION_NO': 'ST02-SXTMZ02', 'CODE': '100', 'OFFLINE_TIME': '2026-09-03 10:29:51', 'WORK_TIME': 44, 'K_PART_NO': '', 'K_PART_BATCH': '', 'Q_PART_NO': '', 'Q_PART_BATCH': '', 'J_PART_NO': '', 'J_PART_BATCH': '', 'H_PART_NO': '', 'H_PART_BATCH': '', 'F_PART_NO': '', 'F_PART_BATCH': '', 'L_PART_NO': '', 'L_PART_BATCH': '', 'Z_PART_NO': '', 'Z_PART_BATCH': '', 'PCBA_1': '', 'PCBA_2': '', 'SN': 'SN002', 'PART_NO': '3609F003992G0A00', 'STATION_STATUS': 'OK'}
+[INFO]2026-09-03 10:31:58,175:175.0.45924,38360#>[SQL_function4]:712  UPDATE mom_setting SET uuid_num = '3'
+[INFO]2026-09-03 10:31:58,182:182.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,182:182.0.45924,38360#>[Getuuid_num]:304  Getuuid_num lock_uuid.release
+[INFO]2026-09-03 10:31:58,182:182.0.45924,38360#>[SQL_function4]:712  SELECT * FROM planorder_tab WHERE order_no = 'OR260824000003'
+[INFO]2026-09-03 10:31:58,187:187.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,192:192.0.45924,38360#>[TRecv]:4085  ---------------------- Threads create
+[INFO]2026-09-03 10:31:58,192:192.0.45924,83028#>[SendMessage2MOM]:408  >>>>>SendMessage2MOM
+[INFO]2026-09-03 10:31:58,192:192.0.45924,38360#>[Getuuid_num]:298  Getuuid_num lock_uuid.acquire
+[INFO]2026-09-03 10:31:58,192:192.0.45924,83028#>[SendMessage2MOM]:409  http://10.246.140.225:9000/mes.asmx/ProcessInfo
+[INFO]2026-09-03 10:31:58,193:193.0.45924,83028#>[SendMessage2MOM]:410  {'UUID': '20260903L2000002', 'STATION_NO': 'ST04-SXTMZ02', 'CODE': '100', 'OFFLINE_TIME': '2026-09-03 10:30:53', 'WORK_TIME': 21, 'K_PART_NO': '', 'K_PART_BATCH': '', 'Q_PART_NO': '', 'Q_PART_BATCH': '', 'J_PART_NO': '', 'J_PART_BATCH': '', 'H_PART_NO': '', 'H_PART_BATCH': '', 'F_PART_NO': '', 'F_PART_BATCH': '', 'L_PART_NO': '', 'L_PART_BATCH': '', 'Z_PART_NO': '', 'Z_PART_BATCH': '', 'PCBA_1': '', 'PCBA_2': '', 'SN': 'SN002', 'PART_NO': '3609F003992G0A00', 'STATION_STATUS': 'OK'}
+[INFO]2026-09-03 10:31:58,197:197.0.45924,38360#>[SQL_function4]:712  UPDATE mom_setting SET uuid_num = '4'
+[INFO]2026-09-03 10:31:58,204:204.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,204:204.0.45924,38360#>[Getuuid_num]:304  Getuuid_num lock_uuid.release
+[INFO]2026-09-03 10:31:58,206:206.0.45924,38360#>[SQL_function4]:712  SELECT * FROM planorder_tab WHERE order_no = 'OR260824000003'
+[INFO]2026-09-03 10:31:58,210:210.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:31:58,214:214.0.45924,38360#>[TRecv]:4085  ---------------------- Threads create
+[INFO]2026-09-03 10:31:58,214:214.0.45924,52952#>[SendMessage2MOM]:408  >>>>>SendMessage2MOM
+[INFO]2026-09-03 10:31:58,214:214.0.45924,38360#>[TRecv]:4089  ---------------------- Threads success
+[INFO]2026-09-03 10:31:58,215:215.0.45924,52952#>[SendMessage2MOM]:409  http://10.246.140.225:9000/mes.asmx/ProcessInfo
+[INFO]2026-09-03 10:31:58,215:215.0.45924,52952#>[SendMessage2MOM]:410  {'UUID': '20260903L2000003', 'STATION_NO': 'ST14-SXTMZ02', 'CODE': '100', 'OFFLINE_TIME': '2026-09-03 10:31:58', 'WORK_TIME': 34, 'K_PART_NO': '', 'K_PART_BATCH': '', 'Q_PART_NO': '', 'Q_PART_BATCH': '', 'J_PART_NO': '', 'J_PART_BATCH': '', 'H_PART_NO': '', 'H_PART_BATCH': '', 'F_PART_NO': '', 'F_PART_BATCH': '', 'L_PART_NO': '', 'L_PART_BATCH': '', 'Z_PART_NO': '', 'Z_PART_BATCH': '', 'PCBA_1': '', 'PCBA_2': '', 'SN': 'SN002', 'PART_NO': '3609F003992G0A00', 'STATION_STATUS': 'OK'}
+[INFO]2026-09-03 10:31:58,219:219.0.45924,26120#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S001", "Station_No": "ST14", "Gp_Model": "TEST001", "ETP": "OK"}
+[INFO]2026-09-03 10:31:58,239:239.0.45924,38360#>[SendMessage2MOM]:408  >>>>>SendMessage2MOM
+[INFO]2026-09-03 10:31:58,239:239.0.45924,38360#>[SendMessage2MOM]:409  http://10.246.140.225:9000/mes.asmx/PlanOrderReport
+[INFO]2026-09-03 10:31:58,240:240.0.45924,38360#>[SendMessage2MOM]:410  [{'FACTORYCODE': 'B620', 'ORDERNO': 'OR260824000003', 'PARTNO': '3609F003992G0A00', 'CODE': '100', 'SN': 'SN002', 'LINENO': 'SXTMZ02', 'STATIONNO': 'ST14', 'ONLINETIME': '2026-09-03 10:28:12', 'OFFLINETIME': '2026-09-03 10:31:58', 'PRODUCT_DATE': '2026-09-03', 'PRODUCT_SHIFT': '0'}]
+[INFO]2026-09-03 10:32:00,142:142.0.45924,24792#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:00,173:173.0.45924,65748#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:00,205:205.0.45924,83028#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:00,220:220.0.45924,52952#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:00,252:252.0.45924,38360#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:02,148:148.0.45924,24792#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:02,150:150.0.45924,24792#>[SendMessage2MOM]:496  >>>>>ReceiveMessageFromMOM
+[INFO]2026-09-03 10:32:02,150:150.0.45924,24792#>[SendMessage2MOM]:497  {"STATUS": "NG", "NGSOURCE": "TIMEOUT", "ERRORMSG": "\u4e0a\u4f20MOM\u5931\u8d25"}
+[INFO]2026-09-03 10:32:02,152:152.0.45924,24792#>[ProcessInfo]:5433  >>>>>>>>ProcessInfo ret:{'STATUS': 'NG', 'NGSOURCE': 'TIMEOUT', 'ERRORMSG': '上传MOM失败'}
+[INFO]2026-09-03 10:32:02,153:153.0.45924,43176#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "", "Station_Name": "", "Status": 3, "Message": "上传MOM失败,已保存"}
+[INFO]2026-09-03 10:32:02,179:179.0.45924,65748#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:02,181:181.0.45924,65748#>[SendMessage2MOM]:496  >>>>>ReceiveMessageFromMOM
+[INFO]2026-09-03 10:32:02,181:181.0.45924,65748#>[SendMessage2MOM]:497  {"STATUS": "NG", "NGSOURCE": "TIMEOUT", "ERRORMSG": "\u4e0a\u4f20MOM\u5931\u8d25"}
+[INFO]2026-09-03 10:32:02,182:182.0.45924,65748#>[ProcessInfo]:5433  >>>>>>>>ProcessInfo ret:{'STATUS': 'NG', 'NGSOURCE': 'TIMEOUT', 'ERRORMSG': '上传MOM失败'}
+[INFO]2026-09-03 10:32:02,182:182.0.45924,84812#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "", "Station_Name": "", "Status": 3, "Message": "上传MOM失败,已保存"}
+[INFO]2026-09-03 10:32:02,210:210.0.45924,83028#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:02,212:212.0.45924,83028#>[SendMessage2MOM]:496  >>>>>ReceiveMessageFromMOM
+[INFO]2026-09-03 10:32:02,212:212.0.45924,83028#>[SendMessage2MOM]:497  {"STATUS": "NG", "NGSOURCE": "TIMEOUT", "ERRORMSG": "\u4e0a\u4f20MOM\u5931\u8d25"}
+[INFO]2026-09-03 10:32:02,213:213.0.45924,83028#>[ProcessInfo]:5433  >>>>>>>>ProcessInfo ret:{'STATUS': 'NG', 'NGSOURCE': 'TIMEOUT', 'ERRORMSG': '上传MOM失败'}
+[INFO]2026-09-03 10:32:02,213:213.0.45924,44076#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "", "Station_Name": "", "Status": 3, "Message": "上传MOM失败,已保存"}
+[INFO]2026-09-03 10:32:02,226:226.0.45924,52952#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:02,228:228.0.45924,52952#>[SendMessage2MOM]:496  >>>>>ReceiveMessageFromMOM
+[INFO]2026-09-03 10:32:02,228:228.0.45924,52952#>[SendMessage2MOM]:497  {"STATUS": "NG", "NGSOURCE": "TIMEOUT", "ERRORMSG": "\u4e0a\u4f20MOM\u5931\u8d25"}
+[INFO]2026-09-03 10:32:02,229:229.0.45924,52952#>[ProcessInfo]:5433  >>>>>>>>ProcessInfo ret:{'STATUS': 'NG', 'NGSOURCE': 'TIMEOUT', 'ERRORMSG': '上传MOM失败'}
+[INFO]2026-09-03 10:32:02,230:230.0.45924,40240#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "", "Station_Name": "", "Status": 3, "Message": "上传MOM失败,已保存"}
+[INFO]2026-09-03 10:32:02,257:257.0.45924,38360#>[SendMessage2MOM]:446  网络连接出现问题, 正在尝试再次请求
+[INFO]2026-09-03 10:32:02,258:258.0.45924,38360#>[SendMessage2MOM]:496  >>>>>ReceiveMessageFromMOM
+[INFO]2026-09-03 10:32:02,258:258.0.45924,38360#>[SendMessage2MOM]:497  {"STATUS": "NG", "NGSOURCE": "TIMEOUT", "ERRORMSG": "\u4e0a\u4f20MOM\u5931\u8d25"}
+[INFO]2026-09-03 10:32:02,260:260.0.45924,38360#>[PlanOrderReport]:5338  -----------------------------PlanOrderReport-------------------------
+[INFO]2026-09-03 10:32:02,261:261.0.45924,38360#>[PlanOrderReport]:5339  Back_Data
+[INFO]2026-09-03 10:32:02,261:261.0.45924,66288#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "S002", "Station_No": "", "Station_Name": "", "Status": 3, "Message": "上传MOM失败,已保存"}
+[INFO]2026-09-03 10:32:02,262:262.0.45924,38360#>[SQL_function4]:712  UPDATE qr_confrimation_tab set test_result = 'NG' WHERE qr_code1 = 'SN002' and station_no = 'ST14' and check_result = 'OK'
+[INFO]2026-09-03 10:32:02,271:271.0.45924,38360#>[SQL_function4]:714  True
+[INFO]2026-09-03 10:32:02,272:272.0.45924,38360#>[TRecv]:4145  Code:SN002处理NG,下线更新成功
+[INFO]2026-09-03 10:32:02,272:272.0.45924,38360#>[TRecv]:4157  {'Command': '0x04', 'DataUp_Result': {'Serial_No': 'SN002', 'Station_No': 'ST14', 'Result': 'OK', 'Message': '0'}}
+[INFO]2026-09-03 10:32:02,272:272.0.45924,38360#>[TRecv]:4161  lock2.release
+[INFO]2026-09-03 10:32:02,274:274.0.45924,49876#>[TRecv]:2650  ---------------MES自身MQTT回环，pass-------------- client=python-getmqtt-88 ip=127.0.0.1 data={"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}
+[INFO]2026-09-03 10:32:02,274:274.0.45924,45896#>[_broadcast_message]:1113  --------_broadcast_queue.put--Msg2Station/ST14--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')--None---<Queue maxsize=0 _queue=[{'session': Session(clientId=python-getmqtt-88, state=connected), 'topic': 'Msg2Station/ST14', 'data': bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')}] tasks=1534>
+[INFO]2026-09-03 10:32:02,275:275.0.45924,45896#>[_run_broadcast]:1008  --------_broadcast_queue.get--Msg2Station/ST14--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')
+[INFO]2026-09-03 10:32:02,275:275.0.45924,45896#>[_run_broadcast]:1058  client_id:56c9a2ed-e5f8-49ad-acff-759143b1c909
+[INFO]2026-09-03 10:32:02,275:275.0.45924,45896#>[_run_broadcast]:1059  IP/Port:127.0.0.1:50771
+[INFO]2026-09-03 10:32:02,275:275.0.45924,45896#>[_run_broadcast]:1066  --------ready_broadcast--------
+[INFO]2026-09-03 10:32:02,276:276.0.45924,45896#>[_run_broadcast]:1067  Task-5201------Msg2Station/ST14--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')
+[INFO]2026-09-03 10:32:02,276:276.0.45924,45896#>[_run_broadcast]:1068  running_tasks:1--deque([<Task pending name='Task-5201' coro=<ProtocolHandler.mqtt_publish() running at C:\Users\28490\Desktop\瑞博MES后端\COMMON\amqtt\mqtt\protocol\handler.py:192>>])
+[INFO]2026-09-03 10:32:02,276:276.0.45924,45896#>[mqtt_publish]:204  ---------handler.mqtt_publish---------Msg2Station/ST14--bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')--qos2
+[INFO]2026-09-03 10:32:02,276:276.0.45924,45896#>[_handle_qos2_message_flow]:347  ---------Send PUBLISH packet---------
+[INFO]2026-09-03 10:32:02,277:277.0.45924,45896#>[_handle_qos2_message_flow]:348  ----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')
+[INFO]2026-09-03 10:32:02,277:277.0.45924,45896#>[_handle_qos2_message_flow]:352  ---------Wait PUBREC---------
+[INFO]2026-09-03 10:32:02,277:277.0.45924,45896#>[_handle_qos2_message_flow]:364  2.1----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')
+[INFO]2026-09-03 10:32:02,285:285.0.45924,45896#>[_handle_qos2_message_flow]:366  2.2----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')
+[INFO]2026-09-03 10:32:02,286:286.0.45924,45896#>[_handle_qos2_message_flow]:372  ---------Send pubrel---------
+[INFO]2026-09-03 10:32:02,286:286.0.45924,45896#>[_handle_qos2_message_flow]:376  ---------Wait for PUBCOMP---------
+[INFO]2026-09-03 10:32:02,286:286.0.45924,45896#>[_handle_qos2_message_flow]:380  2.3----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')
+[INFO]2026-09-03 10:32:02,286:286.0.45924,45896#>[_handle_qos2_message_flow]:382  2.4----------2----------bytearray(b'{"Command": "0x04", "DataUp_Result": {"Serial_No": "SN002", "Station_No": "ST14", "Result": "OK", "Message": "0"}}')
+[INFO]2026-09-03 10:32:02,286:286.0.45924,45896#>[_handle_qos2_message_flow]:386  ---------_handle_qos2_message_flow END---------

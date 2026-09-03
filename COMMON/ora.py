@@ -454,7 +454,7 @@ def easy_sql_reader(SQL):
         print(err)
         return []
     finally:
-        log.info("database_close")
+        log.debug("database_close")
         try:
             cs.close()
         except:
@@ -480,16 +480,16 @@ def easy_sql_reader(SQL):
                     result[SqlDomain[0]] = str(row[i])
                 i += 1
             res_data.append(result)
-        log.info("database_success")
+        log.debug("database_success")
         return res_data
     except Exception as err:
         print(err)
-        log.info("database_error: " + str(err))
+        log.error("database_error: " + str(err))
         raise Exception("网络异常:" + str(err))
         return []
     finally:
         try:
-            log.info("database_close")
+            log.debug("database_close")
             cs.close()
             connection.close()
         except:
@@ -764,16 +764,16 @@ def sql_execute(SQL):
         django.db.close_old_connections()
         cs = connection.cursor()
         cs.execute(SQL)
-        log.info("database_success")
+        log.debug("database_success")
         return True
     except Exception as err:
         print(err)
-        log.info("database_error: " + str(err))
+        log.error("database_error: " + str(err))
         raise Exception("网络异常")
         return False
     finally:
         try:
-            log.info("database_close")
+            log.debug("database_close")
             cs.close()
             connection.close()
         except:

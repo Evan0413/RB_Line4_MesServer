@@ -81,29 +81,25 @@ client_id = f'python-getmqtt-{random.randint(0, 100)}'
 client = mqtt.Client(client_id=client_id, clean_session=False)
 # 建立mqtt连接
 def on_connect(client, userdata, flag, rc):
-    print("Connected with result code " + str(rc))
     if 0 == rc:
-        print('Connected successfully')
+        log.info("MQTT客户端连接成功 client_id=%s", client_id)
         # client.subscribe(settings.MQTT_TOPIC)
     elif 1 == rc:
-        print("连接失败-不正确的协议版本")
+        log.warning("MQTT客户端连接失败-不正确的协议版本")
     elif 2 == rc:
-        print("连接失败-无效的客户端标识符")
+        log.warning("MQTT客户端连接失败-无效的客户端标识符")
     elif 3 == rc:
-        print("连接失败-服务器不可用")
+        log.warning("MQTT客户端连接失败-服务器不可用")
     elif 4 == rc:
-        print("连接失败-错误的用户名或密码")
+        log.warning("MQTT客户端连接失败-错误的用户名或密码")
     elif 5 == rc:
-        print("连接失败-未授权")
+        log.warning("MQTT客户端连接失败-未授权")
     else:
-        print("6-255: 未定义.")
+        log.warning("MQTT客户端连接失败 rc=%s", rc)
 
 # 接收、处理mqtt消息
 def on_message(client, userdata, msg):
-    print("//Client:on_message position")
-    print(f"//Client:Client Received: `{msg.payload.decode()}` ,from topic: `{msg.topic}` \n")
-    print('//Client:' + str(cache.get('EquipConnect')))
-    print("//Client:-----")
+    log.debug("MQTT客户端收到 topic=%s payload=%s", msg.topic, msg.payload.decode())
     # command = msg.split(';')[0]
     # if command == '0x01':
         # loginobj = LoginOutMsg()

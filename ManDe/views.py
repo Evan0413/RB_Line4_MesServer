@@ -683,8 +683,7 @@ def login(request):
 def main(request):
     try:
         user_uuid = request.GET.get('uuid', '')
-        print(">>>>>")
-        print(user_uuid)
+        log.debug("menus uuid=%s", user_uuid)
 
         # # 验证缓存中的uuid 判断身份并且刷新uuid过期时限
         # print(cache.get(user_uuid, default=None))
@@ -736,14 +735,12 @@ def main(request):
             "data": Data,
             "meta": meta,
         }
-        print("----------------首页清单列表获取成功---------------")
-        print(Data)
+        log.info("菜单列表获取成功 group=%s menu=%s", len(menulist), len(menu_chk))
 
         return HttpResponse(json.dumps(backdata, ensure_ascii=False))
 
     except Exception as err:
-        print("----------------首页清单列表获取失败---------------")
-        print(err)
+        log.error("菜单列表获取失败: %s", err)
         Data = {
 
         }
@@ -769,11 +766,7 @@ def local_users(request):
         else:
             SQL = " select ID,userid,password,level from employee_tab WHERE userid='" + loginName + "'"
 
-        print(SQL)
-
         data = easy_sql_reader(SQL)
-
-        print(data)
         meta = {
             "msg": "查询成功!",
             "result": "OK"
@@ -782,8 +775,7 @@ def local_users(request):
             "data": data,
             "meta": meta,
         }
-
-        print(backdata)
+        log.info("local_users 查询成功 count=%s", len(data) if data else 0)
 
         return HttpResponse(List_Json(backdata))
 
@@ -887,10 +879,7 @@ def users(request):
         if len(query) != 0:
             SQL += " WHERE userid like '%" + query + "%'"
 
-        print(SQL)
-
         data = aview_easy_sql_reader_page1(SQL, pagenum, pagesize)
-        # print(data)
         meta = {
             "msg": "获取用户列表成功!",
             "result": "OK"
@@ -899,9 +888,7 @@ def users(request):
             "data": data,
             "meta": meta,
         }
-
-        print(backdata)
-        # print(SQL)
+        log.info("用户列表获取成功 total=%s", data.get('total') if isinstance(data, dict) else "")
         return HttpResponse(List_Json(backdata))
 
     except Exception as err:
@@ -1184,19 +1171,14 @@ def devices(request):
         if len(query) != 0:
             SQL += " WHERE equipment_name like '%" + query + "%'"
 
-        print(SQL)
         data = aview_easy_sql_reader_page1(SQL, pagenum, pagesize)
         # 冒泡
         n = len(data['data'])
-        print(n)
         for i in range(n):
-            print(i)
             # Last i elements are already in place
             for j in range(0, n - i - 1):
                 if int(data['data'][j]['equipment_serial']) > int(data['data'][j + 1]['equipment_serial']):
                     data['data'][j], data['data'][j + 1] = data['data'][j + 1], data['data'][j]
-        print(data)
-
 
         meta = {
             "msg": "获取设备列表成功!",
@@ -1206,9 +1188,7 @@ def devices(request):
             "data": data,
             "meta": meta,
         }
-
-        print(backdata)
-        # print(SQL)
+        log.info("设备列表获取成功 total=%s", data.get('total') if isinstance(data, dict) else n)
         return HttpResponse(List_Json(backdata))
 
     except Exception as err:
@@ -1644,10 +1624,7 @@ def EditDeviceInfo(request):
 def CheckDevice(request):
     try:
         equipstatus = cache.get('Equip_Status')
-        print(equipstatus)
-
         checkdevice = cache.get('CheckDevice')
-        print(checkdevice)
 
         meta = {
             "msg": "获取设备列表成功!",
@@ -1657,9 +1634,11 @@ def CheckDevice(request):
             "data": equipstatus,
             "meta": meta,
         }
-
-        print(backdata)
-        # print(SQL)
+        log.info(
+            "点检设备列表获取成功 status=%s check=%s",
+            len(equipstatus) if equipstatus else 0,
+            len(checkdevice) if checkdevice else 0,
+        )
         return HttpResponse(List_Json(backdata))
 
     except Exception as err:
@@ -1816,7 +1795,7 @@ def GetLocalModel_Equipment(request): # equipstatus 代表连接状态未连接�
         "data": back_data,
         "meta": back_meta,
     }
-    print(backdata)
+    log.info("GetLocalModel_Equipment 获取成功 count=%s", len(back_data_list) if back_data_list else 0)
     return HttpResponse(List_Json(backdata))
 
 
@@ -3820,7 +3799,7 @@ def models(request):
         SQL = "select id,gp_model,sn_way from model_tab"
         # data1 = sql_list_first(SQL)
         data = easy_sql_reader(SQL)
-        print(data)
+        log.info("型号列表获取成功 count=%s", len(data) if data else 0)
         meta = {
             "msg": "获取型号列表成功!",
             "result": "OK"
