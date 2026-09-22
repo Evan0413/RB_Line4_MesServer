@@ -37,7 +37,8 @@ async def broker_coro():
                 'max_connections': 60,
             }
         },
-        'sys_interval': 10,
+        # 0 关闭定时 $SYS 广播，避免空闲时仍往广播队列灌状态消息
+        'sys_interval': 0,
         # 机台订阅 QoS2 时，broker 下发也按 2 走；上限改为 1，避免 PUBREC/PUBCOMP 握手拖住事件循环
         'max-qos': 1,
             "auth": {

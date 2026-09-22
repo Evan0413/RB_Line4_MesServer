@@ -362,6 +362,18 @@ def Getorder_partno_check_flag():
     else:
         raise Exception("order_partno_check_flag 数据不为True or False,请检查")
     return order_partno_check_flag
+def Getmom_upload_flag():
+    filepath = GetFilePath("SoftWare.ini")
+    conf = ConfigParser()
+    conf.read(filepath)
+    mom_upload_flag = conf.get('CommonUse', 'mom_upload_flag', fallback='true')
+    if mom_upload_flag.upper() == "TRUE":
+        return True
+    elif mom_upload_flag.upper() == "FALSE":
+        return False
+    else:
+        raise Exception("mom_upload_flag 数据不为True or False,请检查")
+    return mom_upload_flag
 # 记录当前实际的胶水号
 def Setjs_part_no(js_part_no):
     filepath = GetFilePath("SoftWare.ini")
@@ -729,8 +741,11 @@ def SQL_function_qr_confrimation_tab(SQL):
     return data
 def Select_Column_from_Tab(data_columns, TestItem):
     for it1 in data_columns:
-        if it1['COLUMN_NAME'].upper() == TestItem.upper():
-            print(it1['COLUMN_NAME'] + " : " + TestItem)
+        col = ""
+        if isinstance(it1, dict):
+            col = it1.get('COLUMN_NAME') or it1.get('column_name') or ""
+        if str(col).upper() == TestItem.upper():
+            print(str(col) + " : " + TestItem)
             return False
     print("NONE Cloumnname" + " : " + TestItem)
     return True
@@ -747,11 +762,19 @@ def Alter_Column(TabName, TestItem):
     Tag = False
     AlterStringGroup = ["ALTER TABLE "+ TabName +" ADD `"+ TestItem +"` TEXT DEFAULT NULL","ALTER TABLE "+ TabName +" ADD `"+ TestItem +"_Result` TEXT DEFAULT NULL"]
     for it in AlterStringGroup:
-        if SQL_function4(it):
-            Tag = True
-        else:
-            Tag = False
-            break
+        try:
+            if SQL_function4(it):
+                Tag = True
+            else:
+                Tag = False
+                break
+        except Exception as err:
+            err_str = str(err)
+            if "1060" in err_str or "Duplicate column" in err_str or err_str == "网络异常":
+                Tag = True
+                log.info("列已存在,跳过加列: " + TestItem)
+                continue
+            raise
     return Tag
 
 def Update_Model_Quantity(Gp_Model, Test_Result):
@@ -1584,8 +1607,7 @@ def timestamp_to_timestr(timestamp):
 def TRecv_SP(client_Ip, data, topic):
     try:
         log.info("---------TRecv_SP---------")
-        data = str(data)
-        data = eval(data)
+        data = ParseRecvPayload(data)
         try:
             command = data['Command']
         except Exception as err:
@@ -2230,10 +2252,18 @@ def TRecv_SP(client_Ip, data, topic):
                 SQL = "INSERT INTO " + Station_No + "_test_tab " + "(qr_code1, qr_code2, pcba_code1, pcba_code2 ,lens ,station_no,test_result,gp_model,judge_code,start_time,end_time) values ('" + code_data[0]['qr_code1'] + "','" + code_data[0]['qr_code2'] + "','" + code_data[0]['pcba_code1'] + "','" + code_data[0]['pcba_code2']  + "','" + code_data[0]['lens'] + "','" + Station_No + "','" + Test_Result + "','" + Gp_Model + "','" + Errcode + "','" + Start_Time + "','" + End_Time + "')"
                 AlterRet = True
                 if len(Test_Value) != 0:
+                    added_items = set()
                     for it in Test_Value:
-                        if Select_Column_from_Tab(data_columns, it['Test_Item']):
-                            if Alter_Column(Station_No + "_test_tab ", it['Test_Item']) is False:
+                        item_name = str(it.get('Test_Item', ''))
+                        if item_name.upper() in added_items:
+                            continue
+                        added_items.add(item_name.upper())
+                        if Select_Column_from_Tab(data_columns, item_name):
+                            if Alter_Column(Station_No + "_test_tab ", item_name) is False:
                                 AlterRet = False
+                            else:
+                                data_columns.append({'COLUMN_NAME': item_name})
+                                data_columns.append({'COLUMN_NAME': item_name + '_Result'})
                 if AlterRet:
                     Insert_Tag = SQL_function4(SQL)
                     if Insert_Tag:
@@ -2250,11 +2280,7 @@ def TRecv_SP(client_Ip, data, topic):
                     Updata_Tag = False
                     if len(Test_Value) != 0:
                         # Update_TestValue
-                        for i in range(0, len(Test_Value)):
-                            temp = "`" + Test_Value[i]['Test_Item'] + "` = '" + Test_Value[i]['Value'] + "',`" + Test_Value[i]['Test_Item'] + "_Result` = '" + Test_Value[i]['Result'] + "'"
-                            if i < len(Test_Value) - 1:
-                                temp += " , "
-                            UpdateTestValue += temp
+                        UpdateTestValue = BuildTestValueSetSql(Test_Value, use_backtick=True)
                         SQL = "UPDATE " + Station_No + "_test_tab set " + UpdateTestValue + " WHERE " + code_name + " = '" + Serial_No + "' and  station_no = '" + Station_No + "'"
                         if SQL_function4(SQL):
                             Updata_Tag = True
@@ -2276,70 +2302,74 @@ def TRecv_SP(client_Ip, data, topic):
 
                         # ---------- 数据库记录时间2 ----------- NG / 最后一站OK  发送产品信息给MOM ------------------------
                         # if not (Test_Result.upper() == "NG" and Station_No == equipnumgroup[len(equipnumgroup) - 1]):
-                        SQL = "SELECT * FROM planorder_stand_tab WHERE order_no = '" + current_order_stand + "'"
-                        order_data = SQL_function3(SQL)
+                        mom_upload_flag = Getmom_upload_flag()
+                        if mom_upload_flag:
+                            SQL = "SELECT * FROM planorder_stand_tab WHERE order_no = '" + current_order_stand + "'"
+                            order_data = SQL_function3(SQL)
 
-                        SQL = "SELECT * FROM qr_confrimation_tab_sp WHERE " + code_name + " = '" + Serial_No + "'"
-                        pro_data = SQL_function3(SQL)
-                        if len(pro_data) == 0:
-                            msg = "未查询到Code: " + Serial_No
-                            raise Exception(msg)
+                            SQL = "SELECT * FROM qr_confrimation_tab_sp WHERE " + code_name + " = '" + Serial_No + "'"
+                            pro_data = SQL_function3(SQL)
+                            if len(pro_data) == 0:
+                                msg = "未查询到Code: " + Serial_No
+                                raise Exception(msg)
 
-                        SQL = "SELECT * FROM planorder_partno_tab WHERE gp_model = '" + pro_data[0]['gp_model'] + "'"
-                        partno_data = SQL_function3(SQL)
-                        if len(partno_data) == 0:
-                            msg = "planorder_partno_tab未找到当前型号" + pro_data[0]['gp_model']
-                            raise Exception(msg)
+                            SQL = "SELECT * FROM planorder_partno_tab WHERE gp_model = '" + pro_data[0]['gp_model'] + "'"
+                            partno_data = SQL_function3(SQL)
+                            if len(partno_data) == 0:
+                                msg = "planorder_partno_tab未找到当前型号" + pro_data[0]['gp_model']
+                                raise Exception(msg)
 
-                        sta_delta_t = (t - datetime.datetime.strptime(pro_data[0]['check_time'],
-                                                                      '%Y-%m-%d %H:%M:%S')).seconds
+                            sta_delta_t = (t - datetime.datetime.strptime(pro_data[0]['check_time'],
+                                                                          '%Y-%m-%d %H:%M:%S')).seconds
 
-                        mom_uuid1 = t.strftime('%Y%m%d')
-                        mom_uuid2 = ""
+                            mom_uuid1 = t.strftime('%Y%m%d')
+                            mom_uuid2 = ""
 
-                        SQL = "SELECT * FROM qr_confrimation_tab_sp WHERE " + code_name + " = '" + Serial_No + "'"
-                        sta_data = SQL_function3(SQL)
-                        for it in sta_data:
-                            mom_uuid2 = Getuuid_num(t)
-                            if not it['test_time'] == "":
-                                sta_delta_t = (datetime.datetime.strptime(it['test_time'],
-                                                                          '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(
-                                    it['check_time'], '%Y-%m-%d %H:%M:%S')).seconds
-                            else:
-                                sta_delta_t = "0"
-                                it['test_time'] = it['check_time']
-                            Data2mom = {
-                                "UUID": mom_uuid1 + "L" + line_no + mom_uuid2,
-                                "STATION_NO": it['station_no'],
-                                "CODE": "100",
-                                # "OFFLINE_TIME": pro_data[0]['offline_time'],
-                                "OFFLINE_TIME": it['test_time'],
-                                "WORK_TIME": sta_delta_t,
-                                "K_PART_NO": "K_PART_NO",
-                                "K_PART_BATCH": "K_PART_BATCH",
-                                "Q_PART_NO": partno_data[0]['Q_PART_NO'],
-                                "Q_PART_BATCH": partno_data[0]['Q_PART_BATCH'],
-                                "J_PART_NO": "",
-                                "J_PART_BATCH": "",
-                                "H_PART_NO": partno_data[0]['H_PART_NO'],
-                                "H_PART_BATCH": partno_data[0]['H_PART_BATCH'],
-                                "F_PART_NO": "",
-                                "F_PART_BATCH": "",
-                                "L_PART_NO": partno_data[0]['L_PART_NO'],
-                                "L_PART_BATCH": partno_data[0]['L_PART_BATCH'],
-                                "Z_PART_NO": partno_data[0]['Z_PART_NO'],
-                                "Z_PART_BATCH": partno_data[0]['Z_PART_BATCH'],
-                                "PCBA_1": it['pcba_code1'],
-                                "PCBA_2": it['pcba_code2'],
-                                "SN": code_data[0]['stand_code'],
-                                "PART_NO": order_data[0]['part_no'],
-                                "STATION_STATUS": Test_Result.upper(),
-                            }
-                            # 发送单站状态给MOM ---- 生产过程信息接口
-                            if Planorder_stand_ismomcheck():
-                                ret_data = ProcessInfo(Data2mom)
-                                if ret_data['STATUS'] == "NG":
-                                    raise Exception(ret_data['ERRORMSG'])
+                            SQL = "SELECT * FROM qr_confrimation_tab_sp WHERE " + code_name + " = '" + Serial_No + "'"
+                            sta_data = SQL_function3(SQL)
+                            for it in sta_data:
+                                mom_uuid2 = Getuuid_num(t)
+                                if not it['test_time'] == "":
+                                    sta_delta_t = (datetime.datetime.strptime(it['test_time'],
+                                                                              '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(
+                                        it['check_time'], '%Y-%m-%d %H:%M:%S')).seconds
+                                else:
+                                    sta_delta_t = "0"
+                                    it['test_time'] = it['check_time']
+                                Data2mom = {
+                                    "UUID": mom_uuid1 + "L" + line_no + mom_uuid2,
+                                    "STATION_NO": it['station_no'],
+                                    "CODE": "100",
+                                    # "OFFLINE_TIME": pro_data[0]['offline_time'],
+                                    "OFFLINE_TIME": it['test_time'],
+                                    "WORK_TIME": sta_delta_t,
+                                    "K_PART_NO": "K_PART_NO",
+                                    "K_PART_BATCH": "K_PART_BATCH",
+                                    "Q_PART_NO": partno_data[0]['Q_PART_NO'],
+                                    "Q_PART_BATCH": partno_data[0]['Q_PART_BATCH'],
+                                    "J_PART_NO": "",
+                                    "J_PART_BATCH": "",
+                                    "H_PART_NO": partno_data[0]['H_PART_NO'],
+                                    "H_PART_BATCH": partno_data[0]['H_PART_BATCH'],
+                                    "F_PART_NO": "",
+                                    "F_PART_BATCH": "",
+                                    "L_PART_NO": partno_data[0]['L_PART_NO'],
+                                    "L_PART_BATCH": partno_data[0]['L_PART_BATCH'],
+                                    "Z_PART_NO": partno_data[0]['Z_PART_NO'],
+                                    "Z_PART_BATCH": partno_data[0]['Z_PART_BATCH'],
+                                    "PCBA_1": it['pcba_code1'],
+                                    "PCBA_2": it['pcba_code2'],
+                                    "SN": code_data[0]['stand_code'],
+                                    "PART_NO": order_data[0]['part_no'],
+                                    "STATION_STATUS": Test_Result.upper(),
+                                }
+                                # 发送单站状态给MOM ---- 生产过程信息接口
+                                if Planorder_stand_ismomcheck():
+                                    ret_data = ProcessInfo(Data2mom)
+                                    if ret_data['STATUS'] == "NG":
+                                        raise Exception(ret_data['ERRORMSG'])
+                        else:
+                            log.info("mom_upload_flag 已关闭，跳过过程信息上传MOM")
                         # ---------------------- 发送NG或最终OK 给看板 ------------------------------
                         # 发送产品最终生产信息给看板统计
                         # （只需要发送最后一站/失败的dataup结果，也就是最终产品的生产成败信息）
@@ -2365,7 +2395,9 @@ def TRecv_SP(client_Ip, data, topic):
                         # 工单已经CLOSE 生产了一个OK ，但不能确定是最后一个（可能最后一个刚进站使得工单Close，此时就有一个OK出站）
                         if Test_Result.upper() == "OK":
                             print("------------------------------------报工")
-                            if Planorder_stand_ismomcheck():
+                            if not mom_upload_flag:
+                                log.info("mom_upload_flag 已关闭，跳过报工上传MOM")
+                            elif Planorder_stand_ismomcheck():
                                 mom_ret = PlanOrderReport_SP(code_name, Serial_No, Station_No)
                                 if mom_ret is False:
                                     raise Exception("报工上传MOM失败")
@@ -2626,6 +2658,69 @@ def TRecv_SP(client_Ip, data, topic):
     except Exception as err:
         print(str(err))
         return
+def ParseRecvPayload(data):
+    """解析机台上报报文。优先按 JSON 解析（null/true/false），兼容已是 dict 或 Python 字面量。"""
+    if isinstance(data, dict):
+        return data
+    if isinstance(data, (bytes, bytearray)):
+        data = data.decode("utf-8", errors="replace")
+    text = str(data).strip()
+    try:
+        parsed = json.loads(text)
+        if isinstance(parsed, dict):
+            return parsed
+    except (json.JSONDecodeError, TypeError, ValueError):
+        pass
+    return eval(
+        text,
+        {"__builtins__": {}},
+        {"null": None, "true": True, "false": False, "None": None, "True": True, "False": False},
+    )
+
+
+def ToSqlText(value):
+    """SQL 拼接用：JSON null 解析后是 None，不能直接和字符串相加。"""
+    if value is None:
+        return ""
+    return str(value).replace("'", "''")
+
+
+def QuoteIdent(name):
+    """MySQL 列名加反引号，避免 PLS-Value / Gray_Delta.Y1 / R/G 被当成运算符。"""
+    text = "" if name is None else str(name)
+    return "`" + text.replace("`", "``") + "`"
+
+
+def BuildTestValueSetSql(test_value, use_backtick=True):
+    # 同名测试项只保留一条：Value 取最后一个非空，避免后面空 errCode 覆盖 Flare1_Halo_NG
+    merged = {}
+    order = []
+    for it in test_value:
+        item = it.get("Test_Item", "")
+        if item is None or str(item) == "":
+            continue
+        item = str(item)
+        key = item.upper()
+        val = ToSqlText(it.get("Value", ""))
+        res = ToSqlText(it.get("Result", ""))
+        if key not in merged:
+            order.append(key)
+            merged[key] = {"item": item, "val": val, "res": res}
+        else:
+            if val != "":
+                merged[key]["val"] = val
+            if res != "":
+                merged[key]["res"] = res
+    parts = []
+    for key in order:
+        rec = merged[key]
+        parts.append(
+            QuoteIdent(rec["item"]) + " = '" + rec["val"] + "',"
+            + QuoteIdent(rec["item"] + "_Result") + " = '" + rec["res"] + "'"
+        )
+    return ",".join(parts)
+
+
 def GetStationNoFromPayload(data):
     if not isinstance(data, dict):
         return ""
@@ -2654,49 +2749,64 @@ def TRecv(client_Ip, data, topic, client_id=""):
         return
     print("*****TRecv接收并解析信息")
     log.info("TRecv接收并解析信息" + str(data))
-    data = eval(data)
+    data = ParseRecvPayload(data)
     print(data)
 
     equip_topic = ""
     device_class = cache.get('DeviceClass', default=None)
-    device_class_sp = cache.get('DeviceClass_SP', default=None)
+    device_class_sp = cache.get('DeviceClass_SP', default=None) or []
     print(device_class_sp)
     station_no = GetStationNoFromPayload(data)
-    # 如果是SP系列机台单独处理(摄像头线体外的独立机台)
-    for it in device_class_sp:
-        if it['EquipIP'] == client_Ip or (station_no and it['EquipNumber'] == station_no):
-            print("------------------接收的信息是来自SP机台-------------------")
-            log.info("------------------接收的信息是来自SP机台-------------------")
-            print("lock2.acquire")
-            log.info("lock2.acquire")
-            lock2.acquire()
+    if station_no:
+        BindEquipClient(client_id, station_no)
 
-            TRecv_SP(client_Ip, data, topic)
+    def _match_by_number(device_list, number):
+        if not device_list or not number:
+            return None
+        for item in device_list:
+            if item.get('EquipNumber') == number:
+                return item
+        return None
 
-            lock2.release()
-            print("lock2.release")
-            log.info("lock2.release")
-            return
+    # 同 IP 多工位时优先用 Station_No / client_id，避免先命中列表里另一台 SP
+    matched_sp = _match_by_number(device_class_sp, station_no)
+    if matched_sp is None and not station_no:
+        line_hit = FindEquipByClient(device_class or [], client_id, client_Ip)
+        if line_hit is None:
+            matched_sp = FindEquipByClient(device_class_sp, client_id, client_Ip)
+    if matched_sp:
+        print("------------------接收的信息是来自SP机台-------------------")
+        log.info("------------------接收的信息是来自SP机台-------------------")
+        BindEquipClient(client_id, matched_sp['EquipNumber'])
+        if not matched_sp.get('EquipStatus'):
+            matched_sp['EquipStatus'] = True
+            Cache_writer('DeviceClass_SP', device_class_sp, None)
+        print("lock2.acquire")
+        log.info("lock2.acquire")
+        lock2.acquire()
+
+        TRecv_SP(client_Ip, data, topic)
+
+        lock2.release()
+        print("lock2.release")
+        log.info("lock2.release")
+        return
     tag = False
     if device_class is not None:
-        if station_no:
-            for it in device_class:
-                if it['EquipNumber'] == station_no:
-                    tag = True
-                    equip_number = it['EquipNumber']
-                    equip_topic = "Msg2Station/" + equip_number
-                    print(equip_topic)
-                    break
-        else:
-            # 报文未带 Station_No 时回退按 IP 认站（如 0x01）
-            for it in device_class:
-                if it['EquipIP'] == client_Ip:
-                    tag = True
-                    equip_number = it['EquipNumber']
-                    equip_topic = "Msg2Station/" + equip_number
-                    print(equip_topic)
-                    log.info("报文未带Station_No，回退按IP认站:" + equip_topic)
-                    break
+        matched = _match_by_number(device_class, station_no)
+        if matched is None:
+            matched = FindEquipByClient(device_class, client_id, client_Ip)
+            if matched and not station_no:
+                log.info("报文未带Station_No，按client_id/唯一IP认站:" + matched['EquipNumber'])
+        if matched:
+            tag = True
+            equip_number = matched['EquipNumber']
+            equip_topic = "Msg2Station/" + equip_number
+            BindEquipClient(client_id, equip_number)
+            if not matched.get('EquipStatus'):
+                matched['EquipStatus'] = True
+                Cache_writer('DeviceClass', device_class, None)
+            print(equip_topic)
         if tag is False:
             print("------------------接收的信息不是来自当前型号下的设备，不予解析-------------------")
             log.info("------------------接收的信息不是来自当前型号下的设备，不予解析-------------------")
@@ -2833,7 +2943,7 @@ def TRecv(client_Ip, data, topic, client_id=""):
             elif len(data) == 1:
                 # checksn时候，如果当前的条码产品已经存在，就更新该条码的过站时间信息
                 order_sn_tag = True
-            if len(data) == 0 and not stno.upper() == "ST01":
+            if len(data) == 0 and select_count != 0:
                 msg = "Code:" + sn + " ordersn_tab未找到对应的信息"
                 raise Exception(msg)
 
@@ -3925,10 +4035,18 @@ def TRecv(client_Ip, data, topic, client_id=""):
             SQL = "INSERT INTO " + Station_No + "_test_tab " + "(" + code_name + ",station_no,test_result,gp_model,judge_code,start_time,end_time) values ('" + Serial_No + "','" + Station_No + "','" + Test_Result + "','" + Gp_Model + "','" + Errcode + "','" + Start_Time + "','" + End_Time + "')"
             AlterRet = True
             if len(Test_Value) != 0:
+                added_items = set()
                 for it in Test_Value:
-                    if Select_Column_from_Tab(data_columns, it['Test_Item']):
-                        if Alter_Column(Station_No + "_test_tab ", it['Test_Item']) is False:
+                    item_name = str(it.get('Test_Item', ''))
+                    if item_name.upper() in added_items:
+                        continue
+                    added_items.add(item_name.upper())
+                    if Select_Column_from_Tab(data_columns, item_name):
+                        if Alter_Column(Station_No + "_test_tab ", item_name) is False:
                             AlterRet = False
+                        else:
+                            data_columns.append({'COLUMN_NAME': item_name})
+                            data_columns.append({'COLUMN_NAME': item_name + '_Result'})
             # # 重码数据上传判断
             # SQL_same = "SELECT * FROM " + Station_No + "_test_tab WHERE " + code_name + " = '" + Serial_No + "'"
             # data_same = SQL_function3(SQL)
@@ -3952,11 +4070,7 @@ def TRecv(client_Ip, data, topic, client_id=""):
                 Updata_Tag = False
                 if len(Test_Value) != 0:
                     # Update_TestValue
-                    for i in range(0, len(Test_Value)):
-                        temp = Test_Value[i]['Test_Item'] + "='" + Test_Value[i]['Value'] + "'," + Test_Value[i]['Test_Item'] + "_Result='" + Test_Value[i]['Result'] + "'"
-                        if i < len(Test_Value) - 1:
-                            temp += ","
-                        UpdateTestValue += temp
+                    UpdateTestValue = BuildTestValueSetSql(Test_Value)
                     SQL = "UPDATE " + Station_No + "_test_tab set " + UpdateTestValue + " WHERE " + code_name + " = '" + Serial_No + "' and  station_no = '" + Station_No + "'"
                     if SQL_function4(SQL):
                         Updata_Tag = True
@@ -3999,94 +4113,96 @@ def TRecv(client_Ip, data, topic, client_id=""):
 
                 # -------------- 数据库记录时间2 ----------- NG / 最后一站OK  发送产品信息给MOM ------------------------
                         # if not (Test_Result.upper() == "NG" and Station_No == equipnumgroup[len(equipnumgroup) - 1]):
+                        mom_upload_flag = Getmom_upload_flag()
+                        if mom_upload_flag:
+                            SQL = "SELECT * FROM ordersn_tab WHERE " + code_name + " = '" + Serial_No + "'"
+                            pro_data = SQL_function3(SQL)
+                            if len(pro_data) == 0:
+                                result = "NG"
+                                msg = "ordersn_tab未查询到Code: " + Serial_No
+                                raise Exception(msg)
+                            SQL = "SELECT gp_model FROM qr_confrimation_tab WHERE " + code_name + " = '" + Serial_No + "'"
+                            conf_data = SQL_function3(SQL)
+                            if len(conf_data) == 0:
+                                result = "NG"
+                                msg = "qr_confrimation_tab未查询到Code: " + Serial_No
+                                raise Exception(msg)
 
-                        SQL = "SELECT * FROM ordersn_tab WHERE " + code_name + " = '" + Serial_No + "'"
-                        pro_data = SQL_function3(SQL)
-                        if len(pro_data) == 0:
-                            result = "NG"
-                            msg = "ordersn_tab未查询到Code: " + Serial_No
-                            raise Exception(msg)
+                            SQL = "SELECT * FROM planorder_partno_tab WHERE gp_model = '" + conf_data[0]['gp_model'] + "'"
+                            partno_data = SQL_function3(SQL)
 
-                        SQL = "SELECT gp_model FROM qr_confrimation_tab WHERE " + code_name + " = '" + Serial_No + "'"
-                        conf_data = SQL_function3(SQL)
-                        if len(conf_data) == 0:
-                            result = "NG"
-                            msg = "qr_confrimation_tab未查询到Code: " + Serial_No
-                            raise Exception(msg)
+                            SQL = "SELECT * FROM planorder_tab WHERE order_no = '" + pro_data[0]['order_no'] + "'"
+                            order_data = SQL_function3(SQL)
 
-                        SQL = "SELECT * FROM planorder_partno_tab WHERE gp_model = '" + conf_data[0]['gp_model'] + "'"
-                        partno_data = SQL_function3(SQL)
+                            sta_delta_t = (t - datetime.datetime.strptime(pro_data[0]['laststation_time'],'%Y-%m-%d %H:%M:%S')).seconds
 
-                        SQL = "SELECT * FROM planorder_tab WHERE order_no = '" + pro_data[0]['order_no'] + "'"
-                        order_data = SQL_function3(SQL)
+                            mom_uuid1 = t.strftime('%Y%m%d')
+                            mom_uuid2 = ""
 
-                        sta_delta_t = (t - datetime.datetime.strptime(pro_data[0]['laststation_time'],'%Y-%m-%d %H:%M:%S')).seconds
+                            SQL = "SELECT * FROM qr_confrimation_tab WHERE " + code_name + " = '" + Serial_No + "'"
+                            sta_data = SQL_function3(SQL)
 
-                        mom_uuid1 = t.strftime('%Y%m%d')
-                        mom_uuid2 = ""
+                            # 临时多线程表
+                            log.info("---------------------- Threads start")
+                            threads = []
 
-                        SQL = "SELECT * FROM qr_confrimation_tab WHERE " + code_name + " = '" + Serial_No + "'"
-                        sta_data = SQL_function3(SQL)
+                            for it in sta_data:
+                                mom_uuid2 = Getuuid_num(t)
+                                SQL_function4(SQL)
+                                if not it['test_time'] == "":
+                                    sta_delta_t = (datetime.datetime.strptime(it['test_time'],'%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(it['check_time'],'%Y-%m-%d %H:%M:%S')).seconds
+                                else:
+                                    sta_delta_t = "0"
+                                    it['test_time'] = it['check_time']
+                                SQL = "SELECT * FROM planorder_tab WHERE order_no = '" + current_order + "'"
+                                linedata = SQL_function3(SQL)
+                                Data2mom = {
+                                    "UUID": mom_uuid1 + "L" + line_no + mom_uuid2,
+                                    "STATION_NO": it['station_no'] + "-" + linedata[0]['line_no'],
+                                    "CODE": "100",
+                                    # "OFFLINE_TIME": pro_data[0]['offline_time'],
+                                    "OFFLINE_TIME": it['test_time'],
+                                    "WORK_TIME": sta_delta_t,
+                                    "K_PART_NO": "",
+                                    "K_PART_BATCH": "",
+                                    "Q_PART_NO": partno_data[0]['Q_PART_NO'],
+                                    "Q_PART_BATCH": partno_data[0]['Q_PART_BATCH'],
+                                    "J_PART_NO": "",
+                                    "J_PART_BATCH": "",
+                                    "H_PART_NO": partno_data[0]['H_PART_NO'],
+                                    "H_PART_BATCH": partno_data[0]['H_PART_BATCH'],
+                                    "F_PART_NO": "",
+                                    "F_PART_BATCH": "",
+                                    "L_PART_NO": partno_data[0]['L_PART_NO'],
+                                    "L_PART_BATCH": partno_data[0]['L_PART_BATCH'],
+                                    "Z_PART_NO": partno_data[0]['Z_PART_NO'],
+                                    "Z_PART_BATCH": partno_data[0]['Z_PART_BATCH'],
+                                    "PCBA_1": it['pcba_code1'],
+                                    "PCBA_2": it['pcba_code2'],
+                                    "SN": Serial_No,
+                                    "PART_NO": order_data[0]['part_no'],
+                                    "STATION_STATUS": Test_Result.upper(),
+                                }
+                                # # ------------单站依次顺序发送---------------
+                                # # 发送单站状态给MOM ---- 生产过程信息接口
+                                # if Planorder_ismomcheck(code_name,Serial_No):
+                                #     ret_data = ProcessInfo(Data2mom,Test_Result.upper())
+                                #     # 如果发送失败应该保存到本地重传界面 供手动重传
+                                #     if ret_data['STATUS'] == "NG":
+                                #         result = "NG"
+                                #         raise Exception(ret_data['ERRORMSG'])
 
-                        # 临时多线程表
-                        log.info("---------------------- Threads start")
-                        threads = []
-
-                        for it in sta_data:
-                            mom_uuid2 = Getuuid_num(t)
-                            SQL_function4(SQL)
-                            if not it['test_time'] == "":
-                                sta_delta_t = (datetime.datetime.strptime(it['test_time'],'%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(it['check_time'],'%Y-%m-%d %H:%M:%S')).seconds
-                            else:
-                                sta_delta_t = "0"
-                                it['test_time'] = it['check_time']
-                            SQL = "SELECT * FROM planorder_tab WHERE order_no = '" + current_order + "'"
-                            linedata = SQL_function3(SQL)
-                            Data2mom = {
-                                "UUID": mom_uuid1 + "L" + line_no + mom_uuid2,
-                                "STATION_NO": it['station_no'] + "-" + linedata[0]['line_no'],
-                                "CODE": "100",
-                                # "OFFLINE_TIME": pro_data[0]['offline_time'],
-                                "OFFLINE_TIME": it['test_time'],
-                                "WORK_TIME": sta_delta_t,
-                                "K_PART_NO": "",
-                                "K_PART_BATCH": "",
-                                "Q_PART_NO": partno_data[0]['Q_PART_NO'],
-                                "Q_PART_BATCH": partno_data[0]['Q_PART_BATCH'],
-                                "J_PART_NO": "",
-                                "J_PART_BATCH": "",
-                                "H_PART_NO": partno_data[0]['H_PART_NO'],
-                                "H_PART_BATCH": partno_data[0]['H_PART_BATCH'],
-                                "F_PART_NO": "",
-                                "F_PART_BATCH": "",
-                                "L_PART_NO": partno_data[0]['L_PART_NO'],
-                                "L_PART_BATCH": partno_data[0]['L_PART_BATCH'],
-                                "Z_PART_NO": partno_data[0]['Z_PART_NO'],
-                                "Z_PART_BATCH": partno_data[0]['Z_PART_BATCH'],
-                                "PCBA_1": it['pcba_code1'],
-                                "PCBA_2": it['pcba_code2'],
-                                "SN": Serial_No,
-                                "PART_NO": order_data[0]['part_no'],
-                                "STATION_STATUS": Test_Result.upper(),
-                            }
-                            # # ------------单站依次顺序发送---------------
-                            # # 发送单站状态给MOM ---- 生产过程信息接口
-                            # if Planorder_ismomcheck(code_name,Serial_No):
-                            #     ret_data = ProcessInfo(Data2mom,Test_Result.upper())
-                            #     # 如果发送失败应该保存到本地重传界面 供手动重传
-                            #     if ret_data['STATUS'] == "NG":
-                            #         result = "NG"
-                            #         raise Exception(ret_data['ERRORMSG'])
-
-                            # ------------多线程创建---------------
-                            thread = threading.Thread(target=ProcessInfo, args=(Data2mom, Test_Result.upper(),))
-                            threads.append(thread)
-                            thread.start()
-                            log.info("---------------------- Threads create")
-                        # ------------多线程执行完---------------
-                        # for therad in threads:
-                        #     therad.join()
-                        log.info("---------------------- Threads success")
+                                # ------------多线程创建---------------
+                                thread = threading.Thread(target=ProcessInfo, args=(Data2mom, Test_Result.upper(),))
+                                threads.append(thread)
+                                thread.start()
+                                log.info("---------------------- Threads create")
+                            # ------------多线程执行完---------------
+                            # for therad in threads:
+                            #     therad.join()
+                            log.info("---------------------- Threads success")
+                        else:
+                            log.info("mom_upload_flag 已关闭，跳过过程信息上传MOM")
 
 
                 # -------------------------- 发送NG或最终OK 给看板 ------------------------------
@@ -4121,7 +4237,9 @@ def TRecv(client_Ip, data, topic, client_id=""):
                         # 工单已经CLOSE 生产了一个OK ，但不能确定是最后一个（可能最后一个刚进站使得工单Close，此时就有一个OK出站）
                         if Test_Result.upper() == "OK":
                             print("------------------------------------报工")
-                            if Planorder_ismomcheck(code_name,Serial_No):
+                            if not mom_upload_flag:
+                                log.info("mom_upload_flag 已关闭，跳过报工上传MOM")
+                            elif Planorder_ismomcheck(code_name,Serial_No):
                                 mom_ret = PlanOrderReport(code_name, Serial_No, Station_No)
                                 if mom_ret is False:
                                     result = "NG"
@@ -5037,6 +5155,8 @@ def TConn(client_Id, client_Ip, client_Port, link):
     warn_msg = ""
     lock.acquire()
     try:
+        if str(client_Id).startswith("python-getmqtt"):
+            return
         equip_connect = cache.get('EquipConnect', default=None)
         device_class = cache.get('DeviceClass', default=None)
         log.debug("equip_connect:%s", equip_connect)
@@ -5047,56 +5167,51 @@ def TConn(client_Id, client_Ip, client_Port, link):
             warn_msg = '[msg_operation] DeviceClass is None'
             raise Exception(warn_msg)
 
-        SQL = "SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '" + client_Ip + "'"
-        data = SQL_function3(SQL)
-        sta_num = -1
-        if link:
-            sta_num = 0
-        else:
-            sta_num = 1
-
-        if len(data) == 0:
-            log.warning("未在设备表equipment_tab中找到该连接的设备信息 ip=%s", client_Ip)
-        elif len(data) == 1:
-            # 发送给看板viewboard
-            viewboard_topic = "Msg2Station/ViewBoard"
-            viewboard_data_send = {
-                "Command": "S002",
-                "Station_No": data[0]['equipment_num'],
-                "Station_Name": data[0]['equipment_name'],
-                "Status": sta_num,  # 0正常  1断开  2故障  3上传MOM失败
-                "Message": ""
-            }
-            SendMessage2Station(viewboard_topic, viewboard_data_send)
-        else:
-            log.warning("在设备表equipment_tab中找到多个设备信息，请检查 ip=%s", client_Ip)
+        device_class_sp = cache.get('DeviceClass_SP', default=None) or []
+        matched = FindEquipByClient(device_class, client_Id, client_Ip)
+        if matched is None:
+            matched = FindEquipByClient(device_class_sp, client_Id, client_Ip)
+        if matched and link:
+            BindEquipClient(client_Id, matched['EquipNumber'])
 
         if equip_connect is not None:
             if link:
                 equip_connect[str(client_Id)] = str(client_Ip) + ':' + str(client_Port)
                 Cache_writer('EquipConnect', equip_connect, None)
             else:
-                equip_connect.pop(str(client_Id))
+                equip_connect.pop(str(client_Id), None)
                 Cache_writer('EquipConnect', equip_connect, None)
+                UnbindEquipClient(client_Id)
         else:
             warn_msg = '[msg_operation] EquipConnect is None, can not record'
             raise Exception(warn_msg)
 
-        if device_class is not None:
-            tag = False
-            for it in device_class:
-                if it['EquipIP'] == client_Ip:
-                    it['EquipStatus'] = link
-                    tag = True
-                    break
-            if tag:
-                Cache_writer('DeviceClass', device_class, None)
+        ApplyEquipConnectStatus(device_class, equip_connect)
+        ApplyEquipConnectStatus(device_class_sp, equip_connect)
+        Cache_writer('DeviceClass', device_class, None)
+        Cache_writer('DeviceClass_SP', device_class_sp, None)
+
+        view_list = []
+        for it in (device_class or []) + (device_class_sp or []):
+            if it.get('EquipIP') == client_Ip:
+                view_list.append(it)
+        if not view_list:
+            SQL = "SELECT equipment_num, equipment_name FROM equipment_tab where equipment_ip = '" + client_Ip + "'"
+            rows = SQL_function3(SQL)
+            if not rows:
+                log.warning("未在设备表equipment_tab中找到该连接的设备信息 ip=%s client=%s", client_Ip, client_Id)
             else:
-                warn_msg = '[msg_operation] Can not find same device in DeviceClass 没有在当前型号下的机台找到相同IP的设备'
-                raise Exception(warn_msg)
-        else:
-            warn_msg = '[msg_operation] DeviceClass is None ,can not change'
-            raise Exception(warn_msg)
+                view_list = [{"EquipNumber": r['equipment_num'], "EquipName": r['equipment_name'], "EquipStatus": link} for r in rows]
+        viewboard_topic = "Msg2Station/ViewBoard"
+        for it in view_list:
+            viewboard_data_send = {
+                "Command": "S002",
+                "Station_No": it['EquipNumber'],
+                "Station_Name": it.get('EquipName', ''),
+                "Status": 0 if it.get('EquipStatus') else 1,  # 0正常  1断开
+                "Message": ""
+            }
+            SendMessage2Station(viewboard_topic, viewboard_data_send)
 
         log.info(
             "设备连接状态更新成功 id=%s ip=%s:%s link=%s",

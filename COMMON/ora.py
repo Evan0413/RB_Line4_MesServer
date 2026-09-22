@@ -769,6 +769,10 @@ def sql_execute(SQL):
     except Exception as err:
         print(err)
         log.error("database_error: " + str(err))
+        err_str = str(err)
+        # 1060：同一包 Test_Value 重复项，或列已加过，按成功处理
+        if "1060" in err_str or "Duplicate column name" in err_str:
+            return True
         raise Exception("网络异常")
         return False
     finally:

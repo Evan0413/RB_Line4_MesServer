@@ -1333,7 +1333,7 @@ def AddDevice(request):
             }
             return HttpResponse(List_Json(backdata))
         print(">>>>>>>")
-        SQL = "select id from equipment_tab where equipment_name='" + equipment_name + "' or equipment_num='" + equipment_num + "'or equipment_ip='" + equipment_ip + "'or equipment_serial='" + equipment_serial + "'"
+        SQL = "select id from equipment_tab where equipment_name='" + equipment_name + "' or equipment_num='" + equipment_num + "' or equipment_serial='" + equipment_serial + "'"
         if not sql_execute(SQL):
             raise Exception('SQL执行失败！')
         print(SQL)
@@ -1469,6 +1469,10 @@ def EditDeviceInfo(request):
 
         for key, value in re_list.items():
             if value != "":
+                # 同一台电脑可开多个工位软件，允许 equipment_ip 重复
+                if key == "equipment_ip":
+                    First_list[key] = value
+                    continue
                 SQL = "select id from equipment_tab where  " + key + "='" + value + "' and id != '" + id + "'"
                 print(SQL)
                 data1 = sql_list_first(SQL)
@@ -1550,10 +1554,7 @@ def EditDeviceInfo(request):
                         it['EquipIP'] = equipment_ip
                         it['EquipSerial'] = equipment_serial
 
-                for it1 in equip_connect.values():
-                    for it2 in device_class:
-                        if it1.split(':')[0] == it2['EquipIP']:
-                            it2['EquipStatus'] = True
+                ApplyEquipConnectStatus(device_class, equip_connect)
                 Cache_writer('DeviceClass', device_class, None)
                 print(cache.get('DeviceClass'))
 
@@ -2816,10 +2817,7 @@ def Remodel(request):
 
             # 对比EquipConnect  DeviceClass
             print("----------------------对比EquipConnect  DeviceClass----------------------")
-            for it1 in equip_connect.values():
-                for it2 in device_class:
-                    if (it1.split(':')[0] == it2['EquipIP']):
-                        it2['EquipStatus'] = True
+            ApplyEquipConnectStatus(device_class, equip_connect)
             Cache_writer('DeviceClass', device_class, None)
             print(equip_status)
             print(equip_connect)
@@ -2935,8 +2933,8 @@ def Remodel(request):
                 ret = False
                 for it2 in equiplist:
                     print(it2)
-                    if it1["EquipIP"] == it2["equipment_ip"]:
-                        print(it1["EquipIP"] + " : " + it2["equipment_ip"])
+                    if it1["EquipNumber"] == it2.get("equipment_num"):
+                        print(it1["EquipNumber"] + " : " + str(it2.get("equipment_num")))
                         ret = True
                         break
                 if ret is True:
@@ -3195,10 +3193,7 @@ def QuickRemodel(request):
         Cache_writer('Equip_Status', equip_status, None)
 
         # 对比EquipConnect  DeviceClass
-        for it1 in equip_connect.values():
-            for it2 in device_class:
-                if (it1.split(':')[0] == it2['EquipIP']):
-                    it2['EquipStatus'] = True
+        ApplyEquipConnectStatus(device_class, equip_connect)
         Cache_writer('DeviceClass', device_class, None)
 
         #----------------------------------------------------------------------------------------------------
@@ -3449,10 +3444,7 @@ def Remodel_SP(request):
 
             # 对比EquipConnect  DeviceClass
             print("----------------------对比EquipConnect  DeviceClass----------------------")
-            for it1 in equip_connect.values():
-                for it2 in device_class_sp:
-                    if (it1.split(':')[0] == it2['EquipIP']):
-                        it2['EquipStatus'] = True
+            ApplyEquipConnectStatus(device_class_sp, equip_connect)
             Cache_writer('DeviceClass_SP', device_class_sp, None)
             print(equip_status_sp)
             print(equip_connect)
@@ -3756,12 +3748,11 @@ def GetLocalModel_Equipment_SP(request):
                         back_data_list[j], back_data_list[j + 1] = back_data_list[j + 1], back_data_list[j]
             print(equip_connect)
             print(back_data_list)
-            for it1 in equip_connect.values():
-                for it2 in back_data_list:
-                    print(it1.split(":")[0])
-                    print(it2['equipment_ip'])
-                    if it1.split(":")[0] == it2['equipment_ip']:
-                        it2['equipStatus'] = 1
+            adapted = [{"EquipNumber": it['equipment_num'], "EquipIP": it['equipment_ip'], "EquipStatus": False, "_row": it} for it in back_data_list]
+            ApplyEquipConnectStatus(adapted, equip_connect)
+            for it in adapted:
+                if it.get('EquipStatus'):
+                    it['_row']['equipStatus'] = 1
 
             for it1 in equipstatus_sp:
                 for it2 in back_data_list:
@@ -3933,11 +3924,8 @@ def AddModels(request):
                                        "EquipIP": i['equipment_ip'], "EquipSerial": i['equipment_serial'],
                                        "EquipStatus": False, "EquipError": False}
 
-                        for it in equip_connect.values():
-                            if it.split(":")[0] == deviceclass['EquipIP']:
-                                deviceclass['EquipStatus'] = True
-
                         device_class.append(deviceclass)
+                        ApplyEquipConnectStatus(device_class, equip_connect)
                         Cache_writer('DeviceClass', device_class, None)
 
             # transaction.savepoint_commit(save_id)
@@ -8232,6 +8220,8 @@ def Get_setting(request):
         timeout_alarm = str(conf['CommonUse']['mom_alarm'])
         # 胶水校验开关
         js_check_flag = str(conf['CommonUse']['js_check_flag'])
+        # 最后一站完成是否上传MOM（过程信息+报工）
+        mom_upload_flag = str(conf.get('CommonUse', 'mom_upload_flag', fallback='true'))
 
         if partno_check_flag.upper() == "TRUE":
             partno_check_flag = True
@@ -8248,12 +8238,18 @@ def Get_setting(request):
         elif js_check_flag.upper() == "FALSE":
             js_check_flag = False
 
+        if mom_upload_flag.upper() == "TRUE":
+            mom_upload_flag = True
+        elif mom_upload_flag.upper() == "FALSE":
+            mom_upload_flag = False
+
         data = {
             "line_no": line_no,
             "partno_check_flag": partno_check_flag,
             "sn_head": sn_head,
             "timeout_alarm": timeout_alarm,
-            "js_check_flag": js_check_flag
+            "js_check_flag": js_check_flag,
+            "mom_upload_flag": mom_upload_flag
         }
         backdata = {
             "data": data,
@@ -8283,6 +8279,7 @@ def Set_setting(request):
         sn_head = str(request.GET.get('sn_head', ''))
         timeout_alarm = str(request.GET.get('timeout_alarm', ''))
         js_check_flag = str(request.GET.get('js_check_flag', ''))
+        mom_upload_flag = str(request.GET.get('mom_upload_flag', ''))
         try:
             line_no_int = int(line_no)
         except:
@@ -8294,11 +8291,16 @@ def Set_setting(request):
         filepath = GetFilePath("SoftWare.ini")
         conf = ConfigParser()  # 需要实例化一个ConfigParser对象
         conf.read(filepath)  # 需要添加上config.ini的路径，不需要open打开，直接给文件路径就读取，也可以指定encoding='utf-8'
+        if mom_upload_flag == '':
+            mom_upload_flag = conf.get('CommonUse', 'mom_upload_flag', fallback='true')
+        elif not (mom_upload_flag.upper() == "TRUE" or mom_upload_flag.upper() == "FALSE"):
+            raise Exception("选项必须为True或False")
         conf.set('CommonUse', 'line_no', line_no)
         conf.set('CommonUse', 'partno_check_flag', partno_check_flag)
         conf.set('CommonUse', 'sn_head', sn_head)
         conf.set('CommonUse', 'mom_alarm', timeout_alarm)
         conf.set('CommonUse', 'js_check_flag', js_check_flag)
+        conf.set('CommonUse', 'mom_upload_flag', mom_upload_flag)
         with open(filepath, 'w', encoding='utf-8') as f:
             conf.write(f)
         backdata = {
